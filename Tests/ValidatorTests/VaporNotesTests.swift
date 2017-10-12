@@ -6,8 +6,7 @@ class VaporNotesTests: XCTestCase {
 
     func testPing() throws {
         let response = try engine.get("/ping")
-        let httpResponse = response.1 as! HTTPURLResponse
-        XCTAssertEqual(200, httpResponse.statusCode)
+        XCTAssertEqual(200, response.response?.statusCode)
     }
 }
 
