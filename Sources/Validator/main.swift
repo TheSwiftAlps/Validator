@@ -2,6 +2,13 @@ import Foundation
 import RequestEngine
 import Rainbow
 
+#if os(Linux)
+// Required in Linux to initialize the random number generator.
+// The arc4random() family of functions is not available
+// outside of BSD-like Unixes.
+srandom(UInt32(time(nil)))
+#endif
+
 func processUnauthorized(_ response: Response) {
     print("Status code: \(response.status)".red.bold.blink)
     if let responseString = response.string {
@@ -34,16 +41,19 @@ var response = try engine.get("/ping")
 processResponse(response)
 
 // Create an user
+let randomEmail = String.randomEmail()
+let randomName = String.randomString(14)
+let randomPassword = String.randomString(40)
 let user = [
-    "email": "vapor@theswiftalps.com",
-    "name": "swiftalps",
-    "password": "swiftalps"
+    "email": randomEmail,
+    "name": randomName,
+    "password": randomPassword,
 ]
 response = try engine.post("/api/v1/users", data: user)
 processResponse(response)
 
 // Login
-engine.auth = .basic("vapor@theswiftalps.com", "swiftalps")
+engine.auth = .basic(randomEmail, randomPassword)
 response = try engine.post("/api/v1/login", data: nil)
 let token = processLogin(response)
 print(token.green)
