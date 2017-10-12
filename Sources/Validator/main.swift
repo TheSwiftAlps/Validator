@@ -7,7 +7,7 @@ let engine = RequestEngine(server)
 
 func processResponse(_ response: Response) {
     let code = response.response?.statusCode ?? 0
-    print("Status code: \(code)".blue)
+    print("Status code: \(code)".blue.underline)
     precondition(code != 401)
     if let responseString = response.string {
         print(responseString.green)
@@ -26,7 +26,7 @@ processResponse(response)
 // Login
 func processLogin(_ response: Response) {
     let code = response.response?.statusCode ?? 0
-    print("Status code: \(code)".blue)
+    print("Status code: \(code)".blue.underline)
     precondition(code != 401)
     if let json = response.json {
         let token = json["token"] as! String
