@@ -6,7 +6,7 @@ let server = CommandLine.arguments[1]
 let engine = RequestEngine(server)
 
 func processResponse(_ response: Response) {
-    let code = response.response?.statusCode ?? 0
+    let code = response.status ?? 0
     print("Status code: \(code)".blue.underline)
     precondition(code != 401)
     if let responseString = response.string {
@@ -25,7 +25,7 @@ processResponse(response)
 
 // Login
 func processLogin(_ response: Response) {
-    let code = response.response?.statusCode ?? 0
+    let code = response.status ?? 0
     print("Status code: \(code)".blue.underline)
     precondition(code != 401)
     if let json = response.json {
@@ -50,7 +50,7 @@ processResponse(response)
 
 // Logout
 func processUnauthorized(_ response: Response) {
-    let code = response.response?.statusCode ?? 0
+    let code = response.status ?? 0
     print("Status code: \(code)".red)
     precondition(code == 401)
     if let responseString = response.string {
