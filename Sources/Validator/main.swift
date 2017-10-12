@@ -1,6 +1,7 @@
 import Foundation
 
-let engine = RequestEngine("http://localhost")
+let server = CommandLine.arguments[1]
+let engine = RequestEngine(server)
 let completionHandler: RequestEngine.Callback = {
     let data = $0
     let response = $1
@@ -21,7 +22,7 @@ try engine.get("/ping", callback: completionHandler)
 // Create an user
 let user = ["email": "vapor@theswiftalps.com", "name": "swiftalps", "password": "swiftalps"]
 
-try engine.post("/users", data: user) {
+try engine.post("/api/v1/users", data: user) {
     let data = $0
     let response = $1
     let _ = $2
@@ -38,7 +39,7 @@ try engine.post("/users", data: user) {
 
 // Login
 engine.auth = .basic("vapor@theswiftalps.com", "swiftalps")
-try engine.post("/login", data: nil) {
+try engine.post("/api/v1/login", data: nil) {
     let data = $0
     let response = $1
     let _ = $2
