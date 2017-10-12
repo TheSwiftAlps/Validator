@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow.git",
+        "state": {
+          "branch": null,
+          "revision": "df197437d8acefb2ae01ab073be1d531fe7781ef",
+          "version": "2.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

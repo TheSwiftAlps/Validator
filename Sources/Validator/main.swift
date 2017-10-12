@@ -1,16 +1,16 @@
 import Foundation
 import RequestEngine
+import Rainbow
 
 let server = CommandLine.arguments[1]
 let engine = RequestEngine(server)
 
 func processResponse(_ response: Response) {
-    print("Response: ")
     let code = response.response?.statusCode ?? 0
-    print("Status code: \(code)")
+    print("Status code: \(code)".blue)
     precondition(code != 401)
     if let responseString = response.string {
-        print(responseString)
+        print(responseString.green)
     }
 }
 
@@ -25,13 +25,12 @@ processResponse(response)
 
 // Login
 func processLogin(_ response: Response) {
-    print("Response: ")
     let code = response.response?.statusCode ?? 0
-    print("Status code: \(code)")
+    print("Status code: \(code)".blue)
     precondition(code != 401)
     if let json = response.json {
         let token = json["token"] as! String
-        print(token)
+        print(token.green)
         engine.auth = .token(token)
     }
 }
@@ -51,12 +50,11 @@ processResponse(response)
 
 // Logout
 func processUnauthorized(_ response: Response) {
-    print("Unauthorized: ")
     let code = response.response?.statusCode ?? 0
-    print("Status code: \(code)")
+    print("Status code: \(code)".red)
     precondition(code == 401)
     if let responseString = response.string {
-        print(responseString)
+        print(responseString.red)
     }
 }
 
