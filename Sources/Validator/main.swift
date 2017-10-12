@@ -20,20 +20,9 @@ var response = try engine.get("/ping")
 processResponse(response)
 
 // Create an user
-func processNewUser(_ response: Response) {
-    print("Response: ")
-    let httpResponse = response.1 as! HTTPURLResponse
-    print(httpResponse.statusCode)
-    precondition(httpResponse.statusCode != 401)
-    if let data = response.0 {
-        let responseString = String(data: data, encoding: .utf8)!
-        print(responseString)
-    }
-}
-
 let user = ["email": "vapor@theswiftalps.com", "name": "swiftalps", "password": "swiftalps"]
 response = try engine.post("/api/v1/users", data: user)
-processNewUser(response)
+processResponse(response)
 
 // Login
 func processLogin(_ response: Response) {
