@@ -1,13 +1,13 @@
 import Foundation
 
 public struct Response {
-    public let status: Int?
+    public let status: Int
     public let error: Error?
     public let json: [String: Any]?
     public let string: String?
 
     init(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
-        self.status = (response as? HTTPURLResponse)?.statusCode
+        self.status = (response as? HTTPURLResponse)?.statusCode ?? 0
         self.error = error
         do {
             if let d = data {
