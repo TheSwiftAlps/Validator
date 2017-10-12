@@ -2,7 +2,6 @@ import Foundation
 
 
 public final class RequestEngine {
-    public typealias Callback = ((Data?, URLResponse?, Error?) -> Void)
 
     public enum AuthenticationType {
         case none
@@ -57,6 +56,7 @@ public final class RequestEngine {
         case get = "GET"
         case put = "PUT"
         case delete = "DELETE"
+        case patch = "PATCH"
     }
 
     public enum LocalError: Error {
@@ -64,16 +64,29 @@ public final class RequestEngine {
         case cannotConvertStringToURL
     }
 
-    public func get(_ endpoint: String, callback: Callback) throws {
+    public func get(_ endpoint: String) throws -> Response {
         let request = try createRequest(.get, endpoint)
-        let (data, response, error) = session.send(request)
-        callback(data, response, error)
+        return session.send(request)
     }
 
-    public func post(_ endpoint: String, data: [String:Any]?, callback: Callback) throws {
+    public func post(_ endpoint: String, data: [String:Any]?) throws -> Response {
         let request = try createRequest(.post, endpoint, data)
-        let (data, response, error) = session.send(request)
-        callback(data, response, error)
+        return session.send(request)
+    }
+
+    public func put(_ endpoint: String, data: [String:Any]?) throws -> Response {
+        let request = try createRequest(.put, endpoint, data)
+        return session.send(request)
+    }
+
+    public func patch(_ endpoint: String, data: [String:Any]?) throws -> Response {
+        let request = try createRequest(.patch, endpoint, data)
+        return session.send(request)
+    }
+
+    public func delete(_ endpoint: String) throws -> Response {
+        let request = try createRequest(.delete, endpoint)
+        return session.send(request)
     }
 
     private func createRequest(_ method: RequestMethod, _ endpoint: String, _ data: [String:Any]? = nil) throws -> URLRequest {

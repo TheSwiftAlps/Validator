@@ -4,10 +4,12 @@ import Foundation
 import Dispatch
 #endif
 
+public typealias Response = (Data?, URLResponse?, Error?)
+
 // Adapted from
 // https://stackoverflow.com/a/34308158/133764
 extension URLSession {
-    func send(_ request: URLRequest) -> (Data?, URLResponse?, Error?) {
+    func send(_ request: URLRequest) -> Response {
         var data: Data?
         var response: URLResponse?
         var error: Error?

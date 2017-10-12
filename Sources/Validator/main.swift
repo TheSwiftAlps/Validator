@@ -1,56 +1,49 @@
 import Foundation
+import RequestEngine
 
 let server = CommandLine.arguments[1]
 let engine = RequestEngine(server)
-let completionHandler: RequestEngine.Callback = {
-    let data = $0
-    let response = $1
-    let _ = $2
+
+func processResponse(_ response: Response) {
     print("Response: ")
-    let httpResponse = response as! HTTPURLResponse
+    let httpResponse = response.1 as! HTTPURLResponse
     print(httpResponse.statusCode)
     precondition(httpResponse.statusCode != 401)
-    if let d = data {
-        let responseString = String(data: d, encoding: .utf8)!
+    if let data = response.0 {
+        let responseString = String(data: data, encoding: .utf8)!
         print(responseString)
     }
 }
 
 // Ping the API
-try engine.get("/ping", callback: completionHandler)
+var response = try engine.get("/ping")
+processResponse(response)
 
 // Create an user
-let user = ["email": "vapor@theswiftalps.com", "name": "swiftalps", "password": "swiftalps"]
-
-try engine.post("/api/v1/users", data: user) {
-    let data = $0
-    let response = $1
-    let _ = $2
-
+func processNewUser(_ response: Response) {
     print("Response: ")
-    let httpResponse = response as! HTTPURLResponse
+    let httpResponse = response.1 as! HTTPURLResponse
     print(httpResponse.statusCode)
     precondition(httpResponse.statusCode != 401)
-    if let d = data {
-        let responseString = String(data: d, encoding: .utf8)!
+    if let data = response.0 {
+        let responseString = String(data: data, encoding: .utf8)!
         print(responseString)
     }
 }
 
-// Login
-engine.auth = .basic("vapor@theswiftalps.com", "swiftalps")
-try engine.post("/api/v1/login", data: nil) {
-    let data = $0
-    let response = $1
-    let _ = $2
+let user = ["email": "vapor@theswiftalps.com", "name": "swiftalps", "password": "swiftalps"]
+response = try engine.post("/api/v1/users", data: user)
+processNewUser(response)
 
+// Login
+func processLogin(_ response: Response) {
     print("Response: ")
-    let httpResponse = response as! HTTPURLResponse
+    let httpResponse = response.1 as! HTTPURLResponse
     print(httpResponse.statusCode)
     precondition(httpResponse.statusCode != 401)
-    if let d = data {
+    if let data = response.0 {
         do {
-            var json = try JSONSerialization.jsonObject(with: d, options:[]) as! [String: String]
+            var json = try JSONSerialization.jsonObject(with: data, options:[]) as! [String: String]
             let token = json["token"]!
             print(token)
             engine.auth = .token(token)
@@ -61,27 +54,32 @@ try engine.post("/api/v1/login", data: nil) {
     }
 }
 
+engine.auth = .basic("vapor@theswiftalps.com", "swiftalps")
+response = try engine.post("/api/v1/login", data: nil)
+processLogin(response)
+
 // Try to create a note
 let note = [
     "title": "test title",
     "contents" : "test note created from swift"
 ]
 
-try engine.post("/api/v1/notes", data: note, callback: completionHandler)
+response = try engine.post("/api/v1/notes", data: note)
+processResponse(response)
 
 // Logout
-engine.auth = .none
-try engine.post("/api/v1/notes", data: note) {
-    let data = $0
-    let response = $1
-    let _ = $2
+func processUnauthorized(_ response: Response) {
     print("Unauthorized: ")
-    let httpResponse = response as! HTTPURLResponse
+    let httpResponse = response.1 as! HTTPURLResponse
     print(httpResponse.statusCode)
     precondition(httpResponse.statusCode == 401)
-    if let d = data {
-        let responseString = String(data: d, encoding: .utf8)!
+    if let data = response.0 {
+        let responseString = String(data: data, encoding: .utf8)!
         print(responseString)
     }
 }
+
+engine.auth = .none
+response = try engine.post("/api/v1/notes", data: note)
+processUnauthorized(response)
 
