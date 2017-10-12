@@ -4,8 +4,6 @@ import Foundation
 import Dispatch
 #endif
 
-public typealias Response = (Data?, URLResponse?, Error?)
-
 // Adapted from
 // https://stackoverflow.com/a/34308158/133764
 extension URLSession {
@@ -27,7 +25,7 @@ extension URLSession {
 
         _ = semaphore.wait(timeout: .distantFuture)
 
-        return (data, response, error)
+        return Response(data, response, error)
     }
 }
 

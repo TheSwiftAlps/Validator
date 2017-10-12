@@ -6,11 +6,10 @@ let engine = RequestEngine(server)
 
 func processResponse(_ response: Response) {
     print("Response: ")
-    let httpResponse = response.1 as! HTTPURLResponse
-    print(httpResponse.statusCode)
-    precondition(httpResponse.statusCode != 401)
-    if let data = response.0 {
-        let responseString = String(data: data, encoding: .utf8)!
+    let code = response.response?.statusCode ?? 0
+    print("Status code: \(code)")
+    precondition(code != 401)
+    if let responseString = response.string {
         print(responseString)
     }
 }
@@ -27,19 +26,13 @@ processResponse(response)
 // Login
 func processLogin(_ response: Response) {
     print("Response: ")
-    let httpResponse = response.1 as! HTTPURLResponse
-    print(httpResponse.statusCode)
-    precondition(httpResponse.statusCode != 401)
-    if let data = response.0 {
-        do {
-            var json = try JSONSerialization.jsonObject(with: data, options:[]) as! [String: String]
-            let token = json["token"]!
-            print(token)
-            engine.auth = .token(token)
-        }
-        catch {
-            print("Error converting JSON")
-        }
+    let code = response.response?.statusCode ?? 0
+    print("Status code: \(code)")
+    precondition(code != 401)
+    if let json = response.json {
+        let token = json["token"] as! String
+        print(token)
+        engine.auth = .token(token)
     }
 }
 
@@ -59,11 +52,10 @@ processResponse(response)
 // Logout
 func processUnauthorized(_ response: Response) {
     print("Unauthorized: ")
-    let httpResponse = response.1 as! HTTPURLResponse
-    print(httpResponse.statusCode)
-    precondition(httpResponse.statusCode == 401)
-    if let data = response.0 {
-        let responseString = String(data: data, encoding: .utf8)!
+    let code = response.response?.statusCode ?? 0
+    print("Status code: \(code)")
+    precondition(code == 401)
+    if let responseString = response.string {
         print(responseString)
     }
 }
