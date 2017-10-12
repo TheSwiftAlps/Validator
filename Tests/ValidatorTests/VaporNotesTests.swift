@@ -4,7 +4,7 @@ import XCTest
 class VaporNotesTests: XCTestCase {
     let engine = RequestEngine("http://localhost")
 
-    func testPing() throws {
+    func testAll() throws {
         let response = try engine.get("/ping")
         XCTAssertEqual(200, response.status)
     }
@@ -17,6 +17,6 @@ extension VaporNotesTests {
     /// to function properly.
     /// See ./Tests/LinuxMain.swift for examples
     static let allTests = [
-        ("testPing", testPing),
+        ("testAll", testAll),
     ]
 }
