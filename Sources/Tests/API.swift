@@ -11,7 +11,7 @@ public struct API {
         return try engine.get("/ping")
     }
 
-    func post(user: [String: String]) throws -> Response {
+    func create(user: [String: String]) throws -> Response {
         return try engine.post("/api/v1/users", data: user)
     }
 
@@ -31,11 +31,11 @@ public struct API {
         engine.auth = .none
     }
 
-    func getNotes() throws -> Response {
+    func notes() throws -> Response {
         return try engine.get("/api/v1/notes")
     }
 
-    func post(note: [String: String]) throws -> Response {
+    func create(note: [String: String]) throws -> Response {
         return try engine.post("/api/v1/notes", data: note)
     }
 }

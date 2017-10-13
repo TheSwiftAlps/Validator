@@ -3,7 +3,6 @@ import RequestEngine
 final public class UserTests: APITest {
     var token = ""
     var email = ""
-    var name = ""
     var password = ""
     var notesCount = 0
 
@@ -24,6 +23,8 @@ final public class UserTests: APITest {
 
     func createUser() throws {
         let user = makeRandomUser()
+        email = user["email"]!
+        password = user["password"]!
         let response = try engine.post("/api/v1/users", data: user)
         try expectEquals(200, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
@@ -72,27 +73,6 @@ final public class UserTests: APITest {
         let response = try engine.post("/api/v1/notes", data: note)
         try expectEquals(401, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
-    }
-}
-
-// Private methods
-extension UserTests {
-    private func makeRandomUser() -> [String: String] {
-        email = String.randomEmail()
-        name = String.randomString(14)
-        password = String.randomString(40)
-        return [
-            "email": email,
-            "name": name,
-            "password": password,
-        ]
-    }
-
-    private func makeRandomNote() -> [String: String] {
-        return [
-            "title": String.randomString(30),
-            "contents" : String.randomString(3000)
-        ]
     }
 }
 

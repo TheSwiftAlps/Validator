@@ -38,3 +38,21 @@ extension APITest {
     }
 }
 
+// Utility methods
+extension APITest {
+    func makeRandomUser() -> [String: String] {
+        return [
+            "email": String.randomEmail(),
+            "name": String.randomString(14),
+            "password": String.randomString(40),
+        ]
+    }
+
+    func makeRandomNote() -> [String: String] {
+        return [
+            "title": String.randomString(30),
+            "contents" : String.randomString(3000)
+        ]
+    }
+}
+
