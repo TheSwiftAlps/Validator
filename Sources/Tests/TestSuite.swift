@@ -14,14 +14,18 @@ public struct TestSuite {
         for testClass in tests {
             let testCase = testClass.init(engine: self.engine)
             print("Processing tests: \(type(of: testCase))".yellow.bold)
-            let allTests = testCase.allTests()!
-            for (testName, testMethod) in allTests {
-                do {
-                    try testMethod()
-                    print("Test \(testName) passed".green)
-                }
-                catch let error {
-                    print("Test \(testName) failed: \(error)".red)
+            if let allTests = testCase.allTests() {
+                for (testName, testMethod) in allTests {
+                    do {
+                        try testMethod()
+                        print("Test \(testName) passed".green)
+                    }
+                    catch APITest.TestError.failed(let message) {
+                        print("Test \(testName) failed: \(message)".red)
+                    }
+                    catch {
+                        print("Test \(testName) threw error: \(error)".red)
+                    }
                 }
             }
         }

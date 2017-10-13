@@ -13,14 +13,17 @@ public class APITest {
         self.engine = engine
     }
 
+    func allTests() -> [(String, TestMethod)]? {
+        return nil
+    }
+}
+
+// Assertions
+extension APITest {
     func expect(_ condition: Bool, _ message: String = "") throws {
         if !condition {
             throw TestError.failed(message)
         }
-    }
-
-    func allTests() -> [(String, TestMethod)]? {
-        return nil
     }
 }
 
