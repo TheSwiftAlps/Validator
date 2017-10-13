@@ -6,6 +6,7 @@ let package = Package(
     name: "Validator",
     products: [
         .library(name: "RequestEngine", targets: ["RequestEngine"]),
+        .library(name: "Tests", targets: ["Tests"]),
         .executable(name: "Validator", targets: ["Validator"]),
     ],
     dependencies: [
@@ -13,7 +14,7 @@ let package = Package(
     ],
     targets: [
         .target(name: "RequestEngine", dependencies: []),
-        .target(name: "Validator", dependencies: ["RequestEngine", "Rainbow"]),
-        .testTarget(name: "ValidatorTests", dependencies: ["RequestEngine"])
+        .target(name: "Tests", dependencies: ["RequestEngine", "Rainbow"]),
+        .target(name: "Validator", dependencies: ["RequestEngine", "Tests", "Rainbow"]),
     ]
 )

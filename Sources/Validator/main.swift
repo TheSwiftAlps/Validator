@@ -1,5 +1,6 @@
 import Foundation
 import RequestEngine
+import Tests
 import Rainbow
 
 #if os(Linux)
@@ -37,8 +38,9 @@ let server = CommandLine.arguments[1]
 let engine = RequestEngine(server)
 
 // Ping the API
-var response = try engine.get("/ping")
-processResponse(response)
+let tests = [ping]
+let suite = TestSuite(engine: engine, tests: tests)
+suite.run()
 
 // Create an user
 let randomEmail = String.randomEmail()
@@ -49,7 +51,7 @@ let user = [
     "name": randomName,
     "password": randomPassword,
 ]
-response = try engine.post("/api/v1/users", data: user)
+var response = try engine.post("/api/v1/users", data: user)
 processResponse(response)
 
 // Login
