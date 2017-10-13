@@ -21,6 +21,10 @@ public class APITest {
 
 // Assertions
 extension APITest {
+    func fail(_ message: String = "Test failed") throws {
+        throw TestError<String>.failed(message)
+    }
+
     func expect(_ condition: Bool, _ message: String = "Expected condition not met") throws {
         if !condition {
             throw TestError<String>.failed(message)

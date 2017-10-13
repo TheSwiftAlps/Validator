@@ -37,11 +37,14 @@ final public class UserTests: APITest {
     func login() throws {
         engine.auth = .basic(email, password)
         let response = try engine.post("/api/v1/login", data: nil)
+        try expectEquals(200, response.status)
         if let json = response.json {
             token = json["token"] as! String
+            try expect(token.characters.count > 0)
         }
-        try expectEquals(200, response.status)
-        try expect(token.characters.count > 0)
+        else {
+            try fail("No JSON in response")
+        }
     }
 
     func noNotes() throws {
@@ -51,6 +54,9 @@ final public class UserTests: APITest {
         if let json = response.json {
             let notes = json["response"] as! [Any]
             try expectEquals(0, notes.count)
+        }
+        else {
+            try fail("No JSON in response")
         }
     }
 
@@ -67,6 +73,9 @@ final public class UserTests: APITest {
         if let json = response.json {
             let notes = json["response"] as! [Any]
             try expectEquals(1, notes.count)
+        }
+        else {
+            try fail("No JSON in response")
         }
     }
 
