@@ -13,9 +13,9 @@ public struct TestSuite {
     public func run() {
         for testClass in tests {
             let testCase = testClass.init(engine: self.engine)
-            print("Processing tests: \(type(of: testCase))".yellow.bold)
-            if let allTests = testCase.allTests() {
-                for (testName, testMethod) in allTests {
+            print("Processing scenario: \(type(of: testCase))".yellow.bold)
+            if let scenario = testCase.scenario() {
+                for (testName, testMethod) in scenario {
                     do {
                         try testMethod()
                         print("Test \(testName) passed".green)

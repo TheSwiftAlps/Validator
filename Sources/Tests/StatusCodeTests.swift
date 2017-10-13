@@ -1,13 +1,13 @@
 final public class StatusCodeTests: APITest {
-    public func ping() throws {
-        let response = try engine.get("/ping")
-        try expect(response.status == 200, "Ping failed")
-    }
-
-    override func allTests() -> [(String, APITest.TestMethod)]? {
+    override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
             ("ping", ping),
         ]
+    }
+
+    public func ping() throws {
+        let response = try engine.get("/ping")
+        try expect(response.status == 200, "Ping failed")
     }
 }
 

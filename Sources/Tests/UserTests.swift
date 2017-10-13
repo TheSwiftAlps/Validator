@@ -6,6 +6,15 @@ final public class UserTests: APITest {
     var name = ""
     var password = ""
 
+    override func scenario() -> [(String, APITest.TestMethod)]? {
+        return [
+            ("createUser", createUser),
+            ("login", login),
+            ("createNote", createNote),
+            ("logout", logout),
+        ]
+    }
+
     func createUser() throws {
         email = String.randomEmail()
         name = String.randomString(14)
@@ -49,14 +58,5 @@ final public class UserTests: APITest {
         engine.auth = .none
         let response = try engine.post("/api/v1/notes", data: note)
         try expect(response.status == 401)
-    }
-
-    override func allTests() -> [(String, APITest.TestMethod)]? {
-        return [
-            ("createUser", createUser),
-            ("login", login),
-            ("createNote", createNote),
-            ("logout", logout),
-        ]
     }
 }

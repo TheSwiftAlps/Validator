@@ -13,7 +13,7 @@ public class APITest {
         self.engine = engine
     }
 
-    func allTests() -> [(String, TestMethod)]? {
+    func scenario() -> [(String, TestMethod)]? {
         return nil
     }
 }
