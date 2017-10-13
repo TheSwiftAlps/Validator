@@ -8,7 +8,7 @@ final public class UserTests: APITest {
             ("createUser", createUser),
             ("login", login),
             ("countNotes", countNotes),
-            ("createNote", createNote),
+            ("createManyNotes", createManyNotes),
             ("countNotes", countNotes),
             ("logout", logout),
         ]
@@ -36,7 +36,7 @@ final public class UserTests: APITest {
         }
     }
 
-    func createNote() throws {
+    func createManyNotes() throws {
         for _ in 1...10 {
             let note = makeRandomNote()
             let response = try api.create(note: note)
