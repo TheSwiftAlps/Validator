@@ -37,6 +37,7 @@ public final class RequestEngine {
     private let session: URLSession
     private let configuration: URLSessionConfiguration
     public var auth = AuthenticationType.none
+    public var contentType = "application/json; charset=utf-8"
 
     public init(_ baseURL: String) {
         self.baseURL = baseURL
@@ -97,8 +98,8 @@ public final class RequestEngine {
 
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Accept")
-        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.setValue(contentType, forHTTPHeaderField: "Accept")
+        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
 
         if let userAuthString = self.auth.header() {
             request.setValue(userAuthString, forHTTPHeaderField: "Authorization")
