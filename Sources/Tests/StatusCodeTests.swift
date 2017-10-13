@@ -7,8 +7,8 @@ final public class StatusCodeTests: APITest {
 
     func ping() throws {
         let response = try api.ping()
-        try expectContentType(.json, response.contentType)
-        try expectStatusCode(.ok, response.status, "When doing a ping, the returning message should contain a status of 200.")
+        try expectContentType(.json, response)
+        try expectStatusCode(.ok, response)
         if let json = response.json {
             try expectEquals(json["ping"] as! String, "pong")
         }

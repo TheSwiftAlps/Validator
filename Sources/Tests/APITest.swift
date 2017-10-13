@@ -1,3 +1,5 @@
+import RequestEngine
+
 public class APITest {
     public typealias TestMethod = () throws -> ()
 
@@ -46,15 +48,15 @@ extension APITest {
         }
     }
 
-    func expectContentType(_ expected: ContentType, _ received: String, _ message: String = "Received wrong Content-Type header") throws {
-        if expected.rawValue != received {
-            throw TestError<String>.notEqual(expected.rawValue, received, message)
+    func expectContentType(_ expected: ContentType, _ received: Response, _ message: String = "Received wrong Content-Type header") throws {
+        if expected.rawValue != received.contentType {
+            throw TestError<String>.notEqual(expected.rawValue, received.contentType, message)
         }
     }
 
-    func expectStatusCode(_ expected: StatusCode, _ received: Int, _ message: String = "Received wrong status code") throws {
-        if expected.rawValue != received {
-            throw TestError<Int>.notEqual(expected.rawValue, received, message)
+    func expectStatusCode(_ expected: StatusCode, _ received: Response, _ message: String = "Received wrong status code") throws {
+        if expected.rawValue != received.status {
+            throw TestError<Int>.notEqual(expected.rawValue, received.status, message)
         }
     }
 }
