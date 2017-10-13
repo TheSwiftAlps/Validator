@@ -5,6 +5,10 @@ final public class UserTests: APITest {
     var email = ""
     var name = ""
     var password = ""
+    let note = [
+        "title": "test title",
+        "contents" : "test note created from swift"
+    ]
 
     override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
@@ -51,11 +55,6 @@ final public class UserTests: APITest {
     }
 
     func createNote() throws {
-        let note = [
-            "title": "test title",
-            "contents" : "test note created from swift"
-        ]
-
         engine.auth = .token(token)
         let response = try engine.post("/api/v1/notes", data: note)
         try expectEquals(200, response.status)
@@ -72,11 +71,6 @@ final public class UserTests: APITest {
     }
 
     func logout() throws {
-        let note = [
-            "title": "test title",
-            "contents" : "test note created from swift"
-        ]
-
         engine.auth = .none
         let response = try engine.post("/api/v1/notes", data: note)
         try expectEquals(401, response.status)
