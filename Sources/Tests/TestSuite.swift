@@ -32,6 +32,9 @@ public struct TestSuite {
                     }
                 }
             }
+            else {
+                print("No tests for this scenario!".red.bold)
+            }
         }
     }
 }
