@@ -32,12 +32,14 @@ final public class UserTests: APITest {
         ]
         let response = try engine.post("/api/v1/users", data: user)
         try expectEquals(200, response.status)
+        try expectEquals("application/json; charset=utf-8", response.contentType)
     }
 
     func login() throws {
         engine.auth = .basic(email, password)
         let response = try engine.post("/api/v1/login", data: nil)
         try expectEquals(200, response.status)
+        try expectEquals("application/json; charset=utf-8", response.contentType)
         if let json = response.json {
             token = json["token"] as! String
             try expect(token.characters.count > 0)
@@ -51,6 +53,7 @@ final public class UserTests: APITest {
         engine.auth = .token(token)
         let response = try engine.get("/api/v1/notes")
         try expectEquals(200, response.status)
+        try expectEquals("application/json; charset=utf-8", response.contentType)
         if let json = response.json {
             let notes = json["response"] as! [Any]
             try expectEquals(0, notes.count)
@@ -64,12 +67,14 @@ final public class UserTests: APITest {
         engine.auth = .token(token)
         let response = try engine.post("/api/v1/notes", data: note)
         try expectEquals(200, response.status)
+        try expectEquals("application/json; charset=utf-8", response.contentType)
     }
 
     func oneNote() throws {
         engine.auth = .token(token)
         let response = try engine.get("/api/v1/notes")
         try expectEquals(200, response.status)
+        try expectEquals("application/json; charset=utf-8", response.contentType)
         if let json = response.json {
             let notes = json["response"] as! [Any]
             try expectEquals(1, notes.count)
@@ -83,6 +88,7 @@ final public class UserTests: APITest {
         engine.auth = .none
         let response = try engine.post("/api/v1/notes", data: note)
         try expectEquals(401, response.status)
+        try expectEquals("application/json; charset=utf-8", response.contentType)
     }
 }
 

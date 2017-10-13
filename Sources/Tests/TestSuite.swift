@@ -27,6 +27,10 @@ public struct TestSuite {
                         print("Test \(testName) failed: expected \(lhs), got \(rhs) instead.".red)
                         print("    Note: \(message)".red)
                     }
+                    catch APITest.TestError<String>.notEqual(let lhs, let rhs, let message) {
+                        print("Test \(testName) failed: expected \(lhs), got \(rhs) instead.".red)
+                        print("    Note: \(message)".red)
+                    }
                     catch {
                         print("Test \(testName) threw error: \(error)".red)
                     }
