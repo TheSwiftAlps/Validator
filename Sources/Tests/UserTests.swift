@@ -37,7 +37,7 @@ final public class UserTests: APITest {
     }
 
     func createNote() throws {
-        for _ in 1...100 {
+        for _ in 1...10 {
             let note = makeRandomNote()
             let response = try api.create(note: note)
             try expectStatusCode(.ok, response)
