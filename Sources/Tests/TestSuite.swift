@@ -5,8 +5,8 @@ public struct TestSuite {
     let tests: [APITest.Type]
     let engine: RequestEngine
 
-    public init(engine: RequestEngine, tests: [APITest.Type]) {
-        self.engine = engine
+    public init(server: String, tests: [APITest.Type]) {
+        self.engine = RequestEngine(server)
         self.tests = tests
     }
 
@@ -20,8 +20,12 @@ public struct TestSuite {
                         try testMethod()
                         print("Test \(testName) passed".green)
                     }
-                    catch APITest.TestError.failed(let message) {
+                    catch APITest.TestError<String>.failed(let message) {
                         print("Test \(testName) failed: \(message)".red)
+                    }
+                    catch APITest.TestError<Int>.notEqual(let lhs, let rhs, let message) {
+                        print("Test \(testName) failed: expected \(lhs), got \(rhs) instead.".red)
+                        print("    Note: \(message)".red)
                     }
                     catch {
                         print("Test \(testName) threw error: \(error)".red)

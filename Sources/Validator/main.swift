@@ -1,5 +1,4 @@
 import Foundation
-import RequestEngine
 import Tests
 
 #if os(Linux)
@@ -11,12 +10,11 @@ srandom(UInt32(time(nil)))
 
 // Get the URL of the server from the command line
 let server = CommandLine.arguments[1]
-let engine = RequestEngine(server)
 
 let tests = [
     StatusCodeTests.self,
     UserTests.self,
 ]
-let suite = TestSuite(engine: engine, tests: tests)
+let suite = TestSuite(server: server, tests: tests)
 suite.run()
 

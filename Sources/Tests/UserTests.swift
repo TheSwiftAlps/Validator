@@ -25,7 +25,7 @@ final public class UserTests: APITest {
             "password": password,
         ]
         let response = try engine.post("/api/v1/users", data: user)
-        try expect(response.status == 200)
+        try expectEquals(200, response.status)
     }
 
     func login() throws {
@@ -34,7 +34,7 @@ final public class UserTests: APITest {
         if let json = response.json {
             token = json["token"] as! String
         }
-        try expect(response.status == 200)
+        try expectEquals(200, response.status)
         try expect(token.characters.count > 0)
     }
 
@@ -46,7 +46,7 @@ final public class UserTests: APITest {
 
         engine.auth = .token(token)
         let response = try engine.post("/api/v1/notes", data: note)
-        try expect(response.status == 200)
+        try expectEquals(200, response.status)
     }
 
     func logout() throws {
@@ -57,6 +57,6 @@ final public class UserTests: APITest {
 
         engine.auth = .none
         let response = try engine.post("/api/v1/notes", data: note)
-        try expect(response.status == 401)
+        try expectEquals(401, response.status)
     }
 }

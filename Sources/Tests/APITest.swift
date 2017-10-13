@@ -3,8 +3,9 @@ import RequestEngine
 public class APITest {
     public typealias TestMethod = () throws -> ()
 
-    public enum TestError: Error {
+    public enum TestError<T: Equatable> : Error {
         case failed(String)
+        case notEqual(T, T, String)
     }
 
     let engine: RequestEngine
@@ -20,9 +21,15 @@ public class APITest {
 
 // Assertions
 extension APITest {
-    func expect(_ condition: Bool, _ message: String = "") throws {
+    func expect(_ condition: Bool, _ message: String = "Expected condition not met") throws {
         if !condition {
-            throw TestError.failed(message)
+            throw TestError<String>.failed(message)
+        }
+    }
+
+    func expectEquals<T: Equatable>(_ expected: T, _ received: T, _ message: String = "Values are not equal") throws {
+        if expected != received {
+            throw TestError<T>.notEqual(expected, received, message)
         }
     }
 }
