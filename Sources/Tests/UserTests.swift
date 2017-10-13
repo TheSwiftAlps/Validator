@@ -23,7 +23,7 @@ final public class UserTests: APITest {
     }
 
     func createUser() throws {
-        let user = makeUser()
+        let user = makeRandomUser()
         let response = try engine.post("/api/v1/users", data: user)
         try expectEquals(200, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
@@ -44,7 +44,7 @@ final public class UserTests: APITest {
     }
 
     func createNote() throws {
-        let note = makeNote()
+        let note = makeRandomNote()
         engine.auth = .token(token)
         let response = try engine.post("/api/v1/notes", data: note)
         try expectEquals(200, response.status)
@@ -67,7 +67,7 @@ final public class UserTests: APITest {
     }
 
     func logout() throws {
-        let note = makeNote()
+        let note = makeRandomNote()
         engine.auth = .none
         let response = try engine.post("/api/v1/notes", data: note)
         try expectEquals(401, response.status)
@@ -77,7 +77,7 @@ final public class UserTests: APITest {
 
 // Private methods
 extension UserTests {
-    private func makeUser() -> [String: String] {
+    private func makeRandomUser() -> [String: String] {
         email = String.randomEmail()
         name = String.randomString(14)
         password = String.randomString(40)
@@ -88,7 +88,7 @@ extension UserTests {
         ]
     }
 
-    private func makeNote() -> [String: String] {
+    private func makeRandomNote() -> [String: String] {
         return [
             "title": String.randomString(30),
             "contents" : String.randomString(3000)
