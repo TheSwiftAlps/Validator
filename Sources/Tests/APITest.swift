@@ -1,5 +1,3 @@
-import RequestEngine
-
 public class APITest {
     public typealias TestMethod = () throws -> ()
 
