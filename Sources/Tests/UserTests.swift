@@ -23,14 +23,7 @@ final public class UserTests: APITest {
     }
 
     func createUser() throws {
-        email = String.randomEmail()
-        name = String.randomString(14)
-        password = String.randomString(40)
-        let user = [
-            "email": email,
-            "name": name,
-            "password": password,
-        ]
+        let user = makeUser()
         let response = try engine.post("/api/v1/users", data: user)
         try expectEquals(200, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
@@ -84,6 +77,17 @@ final public class UserTests: APITest {
 
 // Private methods
 extension UserTests {
+    private func makeUser() -> [String: String] {
+        email = String.randomEmail()
+        name = String.randomString(14)
+        password = String.randomString(40)
+        return [
+            "email": email,
+            "name": name,
+            "password": password,
+        ]
+    }
+
     private func makeNote() -> [String: String] {
         return [
             "title": String.randomString(30),
