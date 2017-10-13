@@ -1,7 +1,4 @@
-import RequestEngine
-
 final public class UserTests: APITest {
-    var token = ""
     var email = ""
     var password = ""
     var notesCount = 0
@@ -12,10 +9,6 @@ final public class UserTests: APITest {
             ("login", login),
             ("countNotes", countNotes),
             ("createNote", createNote),
-            ("createNote", createNote),
-            ("createNote", createNote),
-            ("createNote", createNote),
-            ("createNote", createNote),
             ("countNotes", countNotes),
             ("logout", logout),
         ]
@@ -25,18 +18,17 @@ final public class UserTests: APITest {
         let user = makeRandomUser()
         email = user["email"]!
         password = user["password"]!
-        let response = try engine.post("/api/v1/users", data: user)
+        let response = try api.create(user: user)
         try expectEquals(200, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
     }
 
     func login() throws {
-        engine.auth = .basic(email, password)
-        let response = try engine.post("/api/v1/login")
+        let response = try api.login(user: email, pass: password)
         try expectEquals(200, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
         if let json = response.json {
-            token = json["token"] as! String
+            let token = json["token"] as! String
             try expect(token.characters.count > 0)
         }
         else {
@@ -45,17 +37,17 @@ final public class UserTests: APITest {
     }
 
     func createNote() throws {
-        let note = makeRandomNote()
-        engine.auth = .token(token)
-        let response = try engine.post("/api/v1/notes", data: note)
-        try expectEquals(200, response.status)
-        try expectEquals("application/json; charset=utf-8", response.contentType)
-        notesCount += 1
+        for _ in 1...100 {
+            let note = makeRandomNote()
+            let response = try api.create(note: note)
+            try expectEquals(200, response.status)
+            try expectEquals("application/json; charset=utf-8", response.contentType)
+            notesCount += 1
+        }
     }
 
     func countNotes() throws {
-        engine.auth = .token(token)
-        let response = try engine.get("/api/v1/notes")
+        let response = try api.notes()
         try expectEquals(200, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
         if let json = response.json {
@@ -68,9 +60,9 @@ final public class UserTests: APITest {
     }
 
     func logout() throws {
+        api.logout()
         let note = makeRandomNote()
-        engine.auth = .none
-        let response = try engine.post("/api/v1/notes", data: note)
+        let response = try api.create(note: note)
         try expectEquals(401, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
     }

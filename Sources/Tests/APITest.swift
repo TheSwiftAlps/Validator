@@ -8,10 +8,10 @@ public class APITest {
         case notEqual(T, T, String)
     }
 
-    let engine: RequestEngine
+    let api: API
 
-    required public init(engine: RequestEngine) {
-        self.engine = engine
+    required public init(api: API) {
+        self.api = api
     }
 
     func scenario() -> [(String, TestMethod)]? {

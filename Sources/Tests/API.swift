@@ -15,7 +15,7 @@ public struct API {
         return try engine.post("/api/v1/users", data: user)
     }
 
-    func login(user: String, pass: String) throws {
+    func login(user: String, pass: String) throws -> Response {
         engine.auth = .basic(user, pass)
         let response = try engine.post("/api/v1/login")
         if let json = response.json {
@@ -25,6 +25,7 @@ public struct API {
         else {
             engine.auth = .none
         }
+        return response
     }
 
     func logout() {

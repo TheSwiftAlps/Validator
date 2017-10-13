@@ -3,16 +3,17 @@ import RequestEngine
 
 public struct TestSuite {
     let tests: [APITest.Type]
-    let engine: RequestEngine
+    let api: API
 
     public init(server: String, tests: [APITest.Type]) {
-        self.engine = RequestEngine(server)
+        let engine = RequestEngine(server)
+        self.api = API(engine)
         self.tests = tests
     }
 
     public func run() {
         for testClass in tests {
-            let testCase = testClass.init(engine: self.engine)
+            let testCase = testClass.init(api: self.api)
             print("Processing scenario: \(type(of: testCase))".yellow.bold)
             if let scenario = testCase.scenario() {
                 for (testName, testMethod) in scenario {
