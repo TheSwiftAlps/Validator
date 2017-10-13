@@ -18,8 +18,8 @@ public struct TestSuite {
                 try test(engine)
                 print("Test \(test) passed".green)
             }
-            catch {
-                print("Test \(test) failed".red)
+            catch let error {
+                print("Test failed, \(error)".red)
             }
         }
     }
