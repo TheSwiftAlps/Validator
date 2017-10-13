@@ -10,7 +10,9 @@ final public class UserTests: APITest {
         return [
             ("createUser", createUser),
             ("login", login),
+            ("noNotes", noNotes),
             ("createNote", createNote),
+            ("oneNote", oneNote),
             ("logout", logout),
         ]
     }
@@ -38,6 +40,16 @@ final public class UserTests: APITest {
         try expect(token.characters.count > 0)
     }
 
+    func noNotes() throws {
+        engine.auth = .token(token)
+        let response = try engine.get("/api/v1/notes")
+        try expectEquals(200, response.status)
+        if let json = response.json {
+            let notes = json["response"] as! [Any]
+            try expectEquals(0, notes.count)
+        }
+    }
+
     func createNote() throws {
         let note = [
             "title": "test title",
@@ -47,6 +59,16 @@ final public class UserTests: APITest {
         engine.auth = .token(token)
         let response = try engine.post("/api/v1/notes", data: note)
         try expectEquals(200, response.status)
+    }
+
+    func oneNote() throws {
+        engine.auth = .token(token)
+        let response = try engine.get("/api/v1/notes")
+        try expectEquals(200, response.status)
+        if let json = response.json {
+            let notes = json["response"] as! [Any]
+            try expectEquals(1, notes.count)
+        }
     }
 
     func logout() throws {
@@ -60,3 +82,4 @@ final public class UserTests: APITest {
         try expectEquals(401, response.status)
     }
 }
+
