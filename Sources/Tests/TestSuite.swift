@@ -13,7 +13,7 @@ public struct TestSuite {
     public func run() {
         for testClass in tests {
             let testCase = testClass.init(engine: self.engine)
-            print("Processing tests: \(type(of: testCase))".yellow)
+            print("Processing tests: \(type(of: testCase))".yellow.bold)
             let allTests = testCase.allTests()!
             for (testName, testMethod) in allTests {
                 do {
