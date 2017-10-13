@@ -11,7 +11,7 @@ final public class UserTests: APITest {
         return [
             ("createUser", createUser),
             ("login", login),
-            ("noNotes", noNotes),
+            ("countNotes", countNotes),
             ("createNote", createNote),
             ("createNote", createNote),
             ("createNote", createNote),
@@ -44,20 +44,6 @@ final public class UserTests: APITest {
         if let json = response.json {
             token = json["token"] as! String
             try expect(token.characters.count > 0)
-        }
-        else {
-            try fail("No JSON in response")
-        }
-    }
-
-    func noNotes() throws {
-        engine.auth = .token(token)
-        let response = try engine.get("/api/v1/notes")
-        try expectEquals(200, response.status)
-        try expectEquals("application/json; charset=utf-8", response.contentType)
-        if let json = response.json {
-            let notes = json["response"] as! [Any]
-            try expectEquals(0, notes.count)
         }
         else {
             try fail("No JSON in response")
