@@ -70,7 +70,7 @@ public final class RequestEngine {
         return session.send(request)
     }
 
-    public func post(_ endpoint: String, data: [String:Any]?) throws -> Response {
+    public func post(_ endpoint: String, data: [String:Any]? = nil) throws -> Response {
         let request = try createRequest(.post, endpoint, data)
         return session.send(request)
     }

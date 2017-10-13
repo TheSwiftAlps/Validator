@@ -38,7 +38,7 @@ final public class UserTests: APITest {
 
     func login() throws {
         engine.auth = .basic(email, password)
-        let response = try engine.post("/api/v1/login", data: nil)
+        let response = try engine.post("/api/v1/login")
         try expectEquals(200, response.status)
         try expectEquals("application/json; charset=utf-8", response.contentType)
         if let json = response.json {
