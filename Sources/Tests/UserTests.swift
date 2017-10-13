@@ -1,0 +1,62 @@
+import RequestEngine
+
+final public class UserTests: APITest {
+    var token = ""
+    var email = ""
+    var name = ""
+    var password = ""
+
+    func createUser() throws {
+        email = String.randomEmail()
+        name = String.randomString(14)
+        password = String.randomString(40)
+        let user = [
+            "email": email,
+            "name": name,
+            "password": password,
+        ]
+        let response = try engine.post("/api/v1/users", data: user)
+        try expect(response.status == 200)
+    }
+
+    func login() throws {
+        engine.auth = .basic(email, password)
+        let response = try engine.post("/api/v1/login", data: nil)
+        if let json = response.json {
+            token = json["token"] as! String
+        }
+        try expect(response.status == 200)
+        try expect(token.characters.count > 0)
+    }
+
+    func createNote() throws {
+        let note = [
+            "title": "test title",
+            "contents" : "test note created from swift"
+        ]
+
+        engine.auth = .token(token)
+        let response = try engine.post("/api/v1/notes", data: note)
+        try expect(response.status == 200)
+    }
+
+    func logout() throws {
+        let note = [
+            "title": "test title",
+            "contents" : "test note created from swift"
+        ]
+
+        engine.auth = .none
+        let response = try engine.post("/api/v1/notes", data: note)
+        try expect(response.status == 401)
+    }
+
+    override func allTests() -> [(String, APITest.TestMethod)]? {
+        return [
+            ("createUser", createUser),
+            ("login", login),
+            ("createNote", createNote),
+            ("logout", logout),
+        ]
+    }
+}
