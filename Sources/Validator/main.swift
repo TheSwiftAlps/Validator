@@ -13,7 +13,10 @@ srandom(UInt32(time(nil)))
 let server = CommandLine.arguments[1]
 let engine = RequestEngine(server)
 
-let tests = [StatusCodeTests.self, UserTests.self]
+let tests = [
+    StatusCodeTests.self,
+    UserTests.self,
+]
 let suite = TestSuite(engine: engine, tests: tests)
 suite.run()
 
