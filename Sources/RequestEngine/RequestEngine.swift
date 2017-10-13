@@ -33,6 +33,19 @@ public final class RequestEngine {
         }
     }
 
+    private enum RequestMethod: String {
+        case post = "POST"
+        case get = "GET"
+        case put = "PUT"
+        case delete = "DELETE"
+        case patch = "PATCH"
+    }
+
+    public enum LocalError: Error {
+        case cannotConvertUTF8ToData
+        case cannotConvertStringToURL
+    }
+
     private let baseURL: String
     private let session: URLSession
     private let configuration: URLSessionConfiguration
@@ -51,20 +64,10 @@ public final class RequestEngine {
             delegate: nil,
             delegateQueue: OperationQueue())
     }
+}
 
-    private enum RequestMethod: String {
-        case post = "POST"
-        case get = "GET"
-        case put = "PUT"
-        case delete = "DELETE"
-        case patch = "PATCH"
-    }
-
-    public enum LocalError: Error {
-        case cannotConvertUTF8ToData
-        case cannotConvertStringToURL
-    }
-
+// Public methods
+extension RequestEngine {
     public func get(_ endpoint: String) throws -> Response {
         let request = try createRequest(.get, endpoint)
         return session.send(request)
@@ -89,7 +92,10 @@ public final class RequestEngine {
         let request = try createRequest(.delete, endpoint)
         return session.send(request)
     }
+}
 
+// Private methods
+extension RequestEngine {
     private func createRequest(_ method: RequestMethod, _ endpoint: String, _ data: [String:Any]? = nil) throws -> URLRequest {
 
         guard let url = URL(string: baseURL + endpoint) else {
