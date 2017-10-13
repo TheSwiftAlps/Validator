@@ -6,6 +6,17 @@ public class APITest {
         case notEqual(T, T, String)
     }
 
+    public enum ContentType: String {
+        case json = "application/json; charset=utf-8"
+    }
+
+    public enum StatusCode: Int {
+        case ok = 200
+        case notFound = 404
+        case error = 500
+        case notAuthorized = 401
+    }
+
     let api: API
 
     required public init(api: API) {
@@ -32,6 +43,18 @@ extension APITest {
     func expectEquals<T: Equatable>(_ expected: T, _ received: T, _ message: String = "Values are not equal") throws {
         if expected != received {
             throw TestError<T>.notEqual(expected, received, message)
+        }
+    }
+
+    func expectContentType(_ expected: ContentType, _ received: String, _ message: String = "Received wrong Content-Type header") throws {
+        if expected.rawValue != received {
+            throw TestError<String>.notEqual(expected.rawValue, received, message)
+        }
+    }
+
+    func expectStatusCode(_ expected: StatusCode, _ received: Int, _ message: String = "Received wrong status code") throws {
+        if expected.rawValue != received {
+            throw TestError<Int>.notEqual(expected.rawValue, received, message)
         }
     }
 }
