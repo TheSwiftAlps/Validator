@@ -9,6 +9,15 @@
           "revision": "df197437d8acefb2ae01ab073be1d531fe7781ef",
           "version": "2.1.0"
         }
+      },
+      {
+        "package": "Reflection",
+        "repositoryURL": "https://github.com/Zewo/Reflection.git",
+        "state": {
+          "branch": null,
+          "revision": "8a90b157455d13b7cde036403a406b72a86f3ea9",
+          "version": "0.15.0"
+        }
       }
     ]
   },

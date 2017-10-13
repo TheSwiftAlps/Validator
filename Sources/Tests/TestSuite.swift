@@ -2,24 +2,26 @@ import Rainbow
 import RequestEngine
 
 public struct TestSuite {
-    public typealias TestFunction = (RequestEngine) throws -> ()
-
-    let tests: [TestFunction]
+    let tests: [APITest.Type]
     let engine: RequestEngine
 
-    public init(engine: RequestEngine, tests: [TestFunction]) {
+    public init(engine: RequestEngine, tests: [APITest.Type]) {
         self.engine = engine
         self.tests = tests
     }
 
     public func run() {
-        for test in tests {
-            do {
-                try test(engine)
-                print("Test \(test) passed".green)
-            }
-            catch let error {
-                print("Test failed, \(error)".red)
+        for testClass in tests {
+            let testCase = testClass.init(engine: self.engine)
+            let allTests = testCase.allTests()!
+            for (testName, testMethod) in allTests {
+                do {
+                    try testMethod()
+                    print("Test \(testName) passed".green)
+                }
+                catch let error {
+                    print("Test \(testName) failed: \(error)".red)
+                }
             }
         }
     }

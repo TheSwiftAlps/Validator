@@ -38,7 +38,7 @@ let server = CommandLine.arguments[1]
 let engine = RequestEngine(server)
 
 // Ping the API
-let tests = [ping]
+let tests = [StatusCodeTest.self]
 let suite = TestSuite(engine: engine, tests: tests)
 suite.run()
 
