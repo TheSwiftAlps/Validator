@@ -14,8 +14,8 @@ public struct TestSuite {
     public func run() {
         for testClass in tests {
             let testCase = testClass.init(api: self.api)
-            print("Processing scenario: \(type(of: testCase))".yellow.bold)
-            if let scenario = testCase.scenario() {
+            if let scenario = testCase.scenario(), scenario.count > 0 {
+                print("Processing scenario: \(type(of: testCase))".yellow.bold)
                 for (testName, testMethod) in scenario {
                     do {
                         try testMethod()
@@ -38,7 +38,7 @@ public struct TestSuite {
                 }
             }
             else {
-                print("No tests for this scenario!".red.bold)
+                print("No tests for this scenario! \(type(of: testCase))".red.bold)
             }
         }
     }
