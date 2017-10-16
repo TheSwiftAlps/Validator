@@ -2,6 +2,7 @@ final public class UserTests: APITest {
     var email = ""
     var password = ""
     var notesCount = 0
+    var noteUUID: String? = nil
 
     override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
@@ -9,6 +10,7 @@ final public class UserTests: APITest {
             ("login", login),
             ("countNotes", countNotes),
             ("createManyNotes", createManyNotes),
+            ("getNote", getNote),
             ("countNotes", countNotes),
             ("logout", logout),
         ]
@@ -40,9 +42,24 @@ final public class UserTests: APITest {
         for _ in 1...10 {
             let note = makeRandomNote()
             let response = try api.create(note: note)
+            if let json = response.json {
+                let data = json["data"] as! [String: Any]
+                noteUUID = data["id"] as? String
+            }
             try expectStatusCode(.ok, response)
             try expectContentType(.json, response)
             notesCount += 1
+        }
+    }
+
+    func getNote() throws {
+        if let id = noteUUID {
+            let response = try api.note(id: id)
+            try expectStatusCode(.ok, response)
+            try expectContentType(.json, response)
+        }
+        else {
+            try fail("No JSON response")
         }
     }
 
@@ -51,7 +68,7 @@ final public class UserTests: APITest {
         try expectStatusCode(.ok, response)
         try expectContentType(.json, response)
         if let json = response.json {
-            let notes = json["response"] as! [Any]
+            let notes = json["data"] as! [Any]
             try expectEquals(notesCount, notes.count)
         }
         else {

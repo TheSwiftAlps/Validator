@@ -36,6 +36,10 @@ public struct API {
         return try engine.get("/api/v1/notes")
     }
 
+    func note(id: String) throws -> Response {
+        return try engine.get("/api/v1/notes/\(id)")
+    }
+
     func create(note: [String: String]) throws -> Response {
         return try engine.post("/api/v1/notes", data: note)
     }
