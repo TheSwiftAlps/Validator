@@ -10,6 +10,7 @@ public class APITest {
 
     public enum ContentType: String {
         case json = "application/json; charset=utf-8"
+        case zip = "application/zip"
     }
 
     public enum StatusCode: Int {

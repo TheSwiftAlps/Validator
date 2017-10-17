@@ -33,6 +33,12 @@ public struct API {
     }
 
     func notes() throws -> Response {
+        engine.contentType = "application/json"
+        return try engine.get("/api/v1/notes")
+    }
+
+    func backup() throws -> Response {
+        engine.contentType = "application/zip"
         return try engine.get("/api/v1/notes")
     }
 

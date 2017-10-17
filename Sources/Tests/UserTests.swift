@@ -11,6 +11,7 @@ final public class UserTests: APITest {
             ("countNotes", countNotes),
             ("createManyNotes", createManyNotes),
             ("getNote", getNote),
+            ("backupNotes", backupNotes),
             ("countNotes", countNotes),
             ("logout", logout),
         ]
@@ -61,6 +62,12 @@ final public class UserTests: APITest {
         else {
             try fail("No JSON response")
         }
+    }
+
+    func backupNotes() throws {
+        let response = try api.backup()
+        try expectStatusCode(.ok, response)
+        try expectContentType(.zip, response)
     }
 
     func countNotes() throws {
