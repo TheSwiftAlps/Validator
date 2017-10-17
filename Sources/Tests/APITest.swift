@@ -1,3 +1,4 @@
+import Foundation
 import RequestEngine
 import LoremSwiftum
 
@@ -76,7 +77,8 @@ extension APITest {
     func makeRandomNote() -> [String: String] {
         return [
             "title": Lorem.title,
-            "contents" : Lorem.sentences(count: 10),
+            "contents": Lorem.sentences(count: 10),
+            "id": UUID().uuidString,
         ]
     }
 }
