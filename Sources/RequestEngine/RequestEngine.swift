@@ -83,12 +83,12 @@ extension RequestEngine {
         return session.send(request)
     }
 
-    public func put(_ endpoint: String, data: [String:Any]?) throws -> Response {
+    public func put(_ endpoint: String, data: [String:Any]? = nil) throws -> Response {
         let request = try createRequest(.put, endpoint, data)
         return session.send(request)
     }
 
-    public func patch(_ endpoint: String, data: [String:Any]?) throws -> Response {
+    public func patch(_ endpoint: String, data: [String:Any]? = nil) throws -> Response {
         let request = try createRequest(.patch, endpoint, data)
         return session.send(request)
     }

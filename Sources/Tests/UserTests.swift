@@ -5,6 +5,7 @@ final public class UserTests: APITest {
     var password = ""
     var notesCount = 0
     var noteUUID: String? = nil
+    var slug: String? = nil
 
     override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
@@ -15,6 +16,7 @@ final public class UserTests: APITest {
             ("getNote", getNote),
             ("backupNotes", backupNotes),
             ("countNotes", countNotes),
+            ("publishNote", publishNote),
             ("logout", logout),
         ]
     }
@@ -48,6 +50,7 @@ final public class UserTests: APITest {
             if let json = response.json {
                 let data = json["data"] as! [String: Any]
                 noteUUID = data["id"] as? String
+                slug = data["slug"] as? String
             }
             try expectStatusCode(.ok, response)
             try expectContentType(.json, response)
@@ -84,6 +87,34 @@ final public class UserTests: APITest {
         }
         else {
             try fail("No JSON in response")
+        }
+    }
+
+    func publishNote() throws {
+        if let id = noteUUID, let slug = slug {
+            // Check that the note is not there
+            let hidden = try api.published(slug: slug)
+            try expectStatusCode(.notFound, hidden)
+
+            // Publish the note
+            let response = try api.publish(id: id)
+            try expectStatusCode(.ok, response)
+
+            // Check that the note is there
+            let page = try api.published(slug: slug)
+            try expectStatusCode(.ok, page)
+            try expectContentType(.html, page)
+
+            // Unpublish the note
+            let response2 = try api.unpublish(id: id)
+            try expectStatusCode(.ok, response2)
+
+            // Check that the note is not there
+            let hiddenAgain = try api.published(slug: slug)
+            try expectStatusCode(.notFound, hiddenAgain)
+        }
+        else {
+            try fail("No ID to retrieve note")
         }
     }
 
