@@ -1,4 +1,5 @@
 import RequestEngine
+import LoremSwiftum
 
 public class APITest {
     public typealias TestMethod = () throws -> ()
@@ -66,16 +67,16 @@ extension APITest {
 extension APITest {
     func makeRandomUser() -> [String: String] {
         return [
-            "email": String.randomEmail(),
-            "name": String.randomString(14),
+            "email": Lorem.email,
+            "name": Lorem.name,
             "password": String.randomString(40),
         ]
     }
 
     func makeRandomNote() -> [String: String] {
         return [
-            "title": String.randomString(30),
-            "contents" : String.randomString(3000)
+            "title": Lorem.title,
+            "contents" : Lorem.sentences(count: 10),
         ]
     }
 }

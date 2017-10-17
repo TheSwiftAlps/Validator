@@ -1,6 +1,5 @@
 import Foundation
 
-
 public final class RequestEngine {
 
     public enum AuthenticationType {
@@ -33,7 +32,7 @@ public final class RequestEngine {
         }
     }
 
-    private enum RequestMethod: String {
+    public enum RequestMethod: String {
         case post = "POST"
         case get = "GET"
         case put = "PUT"
@@ -46,11 +45,17 @@ public final class RequestEngine {
         case cannotConvertStringToURL
     }
 
+    public enum MimeType: String {
+        case json = "application/json; charset=utf-8"
+        case zip = "application/zip"
+    }
+
     private let baseURL: String
     private let session: URLSession
     private let configuration: URLSessionConfiguration
     public var auth = AuthenticationType.none
-    public var contentType = "application/json; charset=utf-8"
+    public var contentType = MimeType.json
+    public var accept = MimeType.json
 
     public init(_ baseURL: String) {
         self.baseURL = baseURL
@@ -104,8 +109,8 @@ extension RequestEngine {
 
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        request.setValue(contentType, forHTTPHeaderField: "Accept")
-        request.setValue(contentType, forHTTPHeaderField: "Content-Type")
+        request.setValue(accept.rawValue, forHTTPHeaderField: "Accept")
+        request.setValue(contentType.rawValue, forHTTPHeaderField: "Content-Type")
 
         if let userAuthString = self.auth.header() {
             request.setValue(userAuthString, forHTTPHeaderField: "Authorization")

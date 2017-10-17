@@ -1,3 +1,5 @@
+import Foundation
+
 final public class UserTests: APITest {
     var email = ""
     var password = ""
@@ -68,6 +70,8 @@ final public class UserTests: APITest {
         let response = try api.backup()
         try expectStatusCode(.ok, response)
         try expectContentType(.zip, response)
+        let url = URL(fileURLWithPath:"/home/akosma/Desktop/archive.zip")
+        try response.save(at: url)
     }
 
     func countNotes() throws {

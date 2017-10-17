@@ -2,12 +2,39 @@
   "object": {
     "pins": [
       {
+        "package": "LoremSwiftum",
+        "repositoryURL": "https://github.com/iamjono/LoremSwiftum.git",
+        "state": {
+          "branch": null,
+          "revision": "09ed8c4a00883eb899541fb73ac6ffaa4d9ab5e7",
+          "version": "0.0.3"
+        }
+      },
+      {
         "package": "Rainbow",
         "repositoryURL": "https://github.com/onevcat/Rainbow.git",
         "state": {
           "branch": null,
           "revision": "df197437d8acefb2ae01ab073be1d531fe7781ef",
           "version": "2.1.0"
+        }
+      },
+      {
+        "package": "SwiftRandom",
+        "repositoryURL": "https://github.com/iamjono/SwiftRandom.git",
+        "state": {
+          "branch": null,
+          "revision": "fe3205f67aa6e8574acc08e9d7cd1fdcaecf49f1",
+          "version": "0.2.5"
+        }
+      },
+      {
+        "package": "SwiftString",
+        "repositoryURL": "https://github.com/iamjono/SwiftString.git",
+        "state": {
+          "branch": null,
+          "revision": "171a8bb129cd2ced82e25a6db3ce240d6433a105",
+          "version": "1.0.14"
         }
       }
     ]

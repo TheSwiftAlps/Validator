@@ -10,11 +10,13 @@ let package = Package(
         .executable(name: "Validator", targets: ["Validator"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/onevcat/Rainbow.git", from: "2.1.0")
+        .package(url: "https://github.com/onevcat/Rainbow.git", from: "2.1.0"),
+        .package(url: "https://github.com/iamjono/LoremSwiftum.git", from: "0.0.3"),
+
     ],
     targets: [
         .target(name: "RequestEngine", dependencies: []),
-        .target(name: "Tests", dependencies: ["RequestEngine", "Rainbow"]),
+        .target(name: "Tests", dependencies: ["RequestEngine", "Rainbow", "LoremSwiftum"]),
         .target(name: "Validator", dependencies: ["Tests"]),
     ]
 )
