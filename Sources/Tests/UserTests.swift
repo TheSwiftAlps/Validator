@@ -62,7 +62,7 @@ final public class UserTests: APITest {
             try expectContentType(.json, response)
         }
         else {
-            try fail("No JSON response")
+            try fail("No ID to retrieve note")
         }
     }
 
