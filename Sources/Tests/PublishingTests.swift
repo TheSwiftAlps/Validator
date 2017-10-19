@@ -8,6 +8,9 @@ final public class PublishingTests: APITest {
             ("checkNotPublished", checkNotPublished),
             ("publishNote", publishNote),
             ("checkPublished", checkPublished),
+            ("logout", logout),
+            ("checkPublished", checkPublished),
+            ("login", login),
             ("unpublishNote", unpublishNote),
             ("checkNotPublished", checkNotPublished),
         ]
