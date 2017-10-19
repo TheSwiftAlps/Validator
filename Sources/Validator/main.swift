@@ -14,6 +14,7 @@ let server = CommandLine.arguments[1]
 let tests = [
     StatusCodeTests.self,
     UserTests.self,
+    PublishingTests.self,
 ]
 let suite = TestSuite(server: server, tests: tests)
 suite.run()

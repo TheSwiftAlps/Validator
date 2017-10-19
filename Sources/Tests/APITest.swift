@@ -3,6 +3,11 @@ import RequestEngine
 import LoremSwiftum
 
 public class APITest {
+    var email = ""
+    var password = ""
+    var noteUUID: String? = nil
+    var slug: String? = nil
+
     public typealias TestMethod = () throws -> ()
 
     public enum TestError<T: Equatable> : Error {
@@ -31,6 +36,53 @@ public class APITest {
 
     func scenario() -> [(String, TestMethod)]? {
         return nil
+    }
+}
+
+extension APITest {
+    func createUser() throws {
+        let user = makeRandomUser()
+        email = user["email"]!
+        password = user["password"]!
+        let response = try api.create(user: user)
+        try expectStatusCode(.ok, response)
+        try expectContentType(.json, response)
+    }
+
+    func login() throws {
+        let response = try api.login(user: email, pass: password)
+        try expectStatusCode(.ok, response)
+        try expectContentType(.json, response)
+        if let json = response.json {
+            let token = json["token"] as! String
+            try expect(token.characters.count > 0)
+        }
+        else {
+            try fail("No JSON in response")
+        }
+    }
+
+    func createNote() throws {
+        let note = makeRandomNote()
+        let response = try api.create(note: note)
+        if let json = response.json {
+            let data = json["data"] as! [String: Any]
+            noteUUID = data["id"] as? String
+            slug = data["slug"] as? String
+            try expectStatusCode(.ok, response)
+            try expectContentType(.json, response)
+        }
+        else {
+            try fail("No JSON in response")
+        }
+    }
+
+    func logout() throws {
+        api.logout()
+        let note = makeRandomNote()
+        let response = try api.create(note: note)
+        try expectStatusCode(.notAuthorized, response)
+        try expectContentType(.json, response)
     }
 }
 
