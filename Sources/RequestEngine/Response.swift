@@ -7,10 +7,12 @@ public struct Response {
     public let json: [String: Any]?
     public let string: String?
     public let data: Data?
+    public let headers: [AnyHashable: Any]?
 
     init(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
         let resp = response as? HTTPURLResponse
         self.status = resp?.statusCode ?? 0
+        self.headers = resp?.allHeaderFields
         self.contentType = resp?.allHeaderFields["Content-Type"] as? String ??  "Unknown content type"
         self.error = error
         self.data = data

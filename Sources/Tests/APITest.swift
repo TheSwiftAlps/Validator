@@ -115,6 +115,15 @@ extension APITest {
             throw TestError<Int>.notEqual(expected.rawValue, received.status, message)
         }
     }
+
+    func expectHeader(_ headerKey: String, _ headerValue: String, _ received: Response, _ message: String = "Wrong response header") throws {
+        if let val = received.headers?[headerKey] as? String {
+            if val == headerValue {
+                return
+            }
+        }
+        throw TestError<String>.failed(message)
+    }
 }
 
 // Utility methods
