@@ -62,5 +62,9 @@ public struct API {
     func create(note: [String: String]) throws -> Response {
         return try engine.post("/api/v1/notes", data: note)
     }
+
+    func search(query: String) throws -> Response {
+        return try engine.post("/api/v1/notes/search", data: ["query": query])
+    }
 }
 

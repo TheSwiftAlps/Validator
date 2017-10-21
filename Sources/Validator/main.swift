@@ -15,6 +15,7 @@ let tests = [
     StatusCodeTests.self,
     UserTests.self,
     PublishingTests.self,
+    SearchTests.self,
 ]
 let suite = TestSuite(server: server, tests: tests)
 suite.run()
