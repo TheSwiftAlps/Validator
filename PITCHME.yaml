@@ -1,0 +1,9 @@
+published: false
+footnote: "Copyright © 2017 AKOSMA Training – All Rights Reserved"
+theme: moon
+highlight: xcode
+slide-number: false
+logo: assets/swiftalps.png
+transition: zoom # convex, concave, default, fade, none, slide and zoom
+mousewheel: false
+
