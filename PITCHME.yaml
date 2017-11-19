@@ -4,6 +4,6 @@ theme: moon
 highlight: xcode
 slide-number: false
 logo: assets/swiftalps.png
-transition: convex # convex, concave, default, fade, none, slide and zoom
+transition: none # convex, concave, default, fade, none, slide and zoom
 mousewheel: false
 
