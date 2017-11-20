@@ -44,7 +44,7 @@ final public class PublishingScenario: BaseScenario {
     ///
     /// - Throws: whatever is thrown.
     func checkNotPublished() throws {
-        if let slug = slug {
+        if let slug = noteSlug {
             let response = try api.published(slug: slug)
             try expectStatusCode(.notFound, response)
         }
@@ -71,7 +71,7 @@ final public class PublishingScenario: BaseScenario {
     ///
     /// - Throws: whatever is thrown.
     func checkPublished() throws {
-        if let slug = slug {
+        if let slug = noteSlug {
             let response = try api.published(slug: slug)
             try expectStatusCode(.ok, response)
             try expectContentType(.html, response)
