@@ -1,5 +1,6 @@
 import Foundation
-import Tests
+import Infrastructure
+import Scenarios
 
 #if os(Linux)
 // Required in Linux to initialize the random number generator.
@@ -18,5 +19,5 @@ let scenarios = [
     PublishingTests.self,
     SearchTests.self,
 ]
-let suite = TestSuite(server: server, tests: scenarios)
+let suite = ScenarioSuite(server: server, scenarios: scenarios)
 suite.run()

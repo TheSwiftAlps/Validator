@@ -1,8 +1,9 @@
 import Foundation
+import Infrastructure
 
-final public class UserTests: APITest {
+final public class UserTests: BaseScenario {
     var notesCount = 0
-    
+
     var desktopPath: String {
         #if os(Linux)
             // NSSearchPathForDirectoriesInDomains not yet available in Linux
@@ -13,8 +14,8 @@ final public class UserTests: APITest {
             return "\(desktop)/archive.zip"
         #endif
     }
-    
-    override func scenario() -> [(String, APITest.TestMethod)]? {
+
+    public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
         return [
             ("Create user", createUser),
             ("Login", login),
@@ -26,14 +27,14 @@ final public class UserTests: APITest {
             ("Logout", logout),
         ]
     }
-    
+
     func createManyNotes() throws {
         for _ in 1...10 {
             try createNote()
             notesCount += 1
         }
     }
-    
+
     func getNote() throws {
         if let id = noteUUID {
             let response = try api.note(id: id)
@@ -44,7 +45,7 @@ final public class UserTests: APITest {
             try fail("No ID to retrieve note")
         }
     }
-    
+
     func backupNotes() throws {
         let response = try api.backup()
         try expectStatusCode(.ok, response)
@@ -52,7 +53,7 @@ final public class UserTests: APITest {
         let url = URL(fileURLWithPath: desktopPath)
         try response.save(at: url)
     }
-    
+
     func countNotes() throws {
         let response = try api.notes()
         try expectStatusCode(.ok, response)

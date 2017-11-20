@@ -1,6 +1,8 @@
-public final class SearchTests: APITest {
+import Infrastructure
 
-    override func scenario() -> [(String, APITest.TestMethod)]? {
+public final class SearchTests: BaseScenario {
+
+    public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
         return [
             ("Create user", createUser),
             ("Login", login),

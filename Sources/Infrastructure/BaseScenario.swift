@@ -2,11 +2,11 @@ import Foundation
 import RequestEngine
 import LoremSwiftum
 
-public class APITest {
+open class BaseScenario {
     var email = ""
     var password = ""
-    var noteUUID: String? = nil
-    var slug: String? = nil
+    public var noteUUID: String? = nil
+    public var slug: String? = nil
 
     public typealias TestMethod = () throws -> ()
 
@@ -15,19 +15,19 @@ public class APITest {
         case notEqual(T, T, String)
     }
 
-    let api: API
+    public let api: API
 
     required public init(api: API) {
         self.api = api
     }
 
-    func scenario() -> [(String, TestMethod)]? {
+    open func scenario() -> [(String, TestMethod)]? {
         return nil
     }
 }
 
-extension APITest {
-    func createUser() throws {
+extension BaseScenario {
+    public func createUser() throws {
         let user = makeRandomUser()
         email = user["email"]!
         password = user["password"]!
@@ -35,8 +35,8 @@ extension APITest {
         try expectStatusCode(.ok, response)
         try expectContentType(.json, response)
     }
-    
-    func login() throws {
+
+    public func login() throws {
         let response = try api.login(user: email, pass: password)
         try expectStatusCode(.ok, response)
         try expectContentType(.json, response)
@@ -48,8 +48,8 @@ extension APITest {
             try fail("No JSON in response")
         }
     }
-    
-    func loginDefaultUser() throws {
+
+    public func loginDefaultUser() throws {
         let response = try api.login(user: "vapor@theswiftalps.com", pass: "swiftalps")
         try expectStatusCode(.ok, response)
         try expectContentType(.json, response)
@@ -61,8 +61,8 @@ extension APITest {
             try fail("No JSON in response")
         }
     }
-    
-    func createNote() throws {
+
+    public func createNote() throws {
         let note = makeRandomNote()
         let response = try api.create(note: note)
         if let json = response.json {
@@ -77,7 +77,7 @@ extension APITest {
         }
     }
 
-    func logout() throws {
+    public func logout() throws {
         api.logout()
         let note = makeRandomNote()
         let response = try api.create(note: note)
@@ -87,36 +87,36 @@ extension APITest {
 }
 
 // Assertions
-extension APITest {
-    func fail(_ message: String = "Test failed") throws {
+extension BaseScenario {
+    public func fail(_ message: String = "Test failed") throws {
         throw TestError<String>.failed(message)
     }
 
-    func expect(_ condition: Bool, _ message: String = "Expected condition not met") throws {
+    public func expect(_ condition: Bool, _ message: String = "Expected condition not met") throws {
         if !condition {
             throw TestError<String>.failed(message)
         }
     }
 
-    func expectEquals<T: Equatable>(_ expected: T, _ received: T, _ message: String = "Values are not equal") throws {
+    public func expectEquals<T: Equatable>(_ expected: T, _ received: T, _ message: String = "Values are not equal") throws {
         if expected != received {
             throw TestError<T>.notEqual(expected, received, message)
         }
     }
 
-    func expectContentType(_ expected: RequestEngine.MimeType, _ received: Response, _ message: String = "Received wrong Content-Type header") throws {
+    public func expectContentType(_ expected: RequestEngine.MimeType, _ received: Response, _ message: String = "Received wrong Content-Type header") throws {
         if expected.rawValue != received.contentType {
             throw TestError<String>.notEqual(expected.rawValue, received.contentType, message)
         }
     }
 
-    func expectStatusCode(_ expected: Response.StatusCode, _ received: Response, _ message: String = "Received wrong status code") throws {
+    public func expectStatusCode(_ expected: Response.StatusCode, _ received: Response, _ message: String = "Received wrong status code") throws {
         if expected != received.status {
             throw TestError<Response.StatusCode>.notEqual(expected, received.status, message)
         }
     }
 
-    func expectHeader(_ headerKey: String, _ headerValue: String, _ received: Response, _ message: String = "Wrong response header") throws {
+    public func expectHeader(_ headerKey: String, _ headerValue: String, _ received: Response, _ message: String = "Wrong response header") throws {
         if let val = received.headers?[headerKey] as? String {
             if val == headerValue {
                 return
@@ -127,7 +127,7 @@ extension APITest {
 }
 
 // Utility methods
-extension APITest {
+extension BaseScenario {
     func makeDefaultUser() -> [String: String] {
         return [
             "email": "vapor@theswiftalps.com",
@@ -135,7 +135,7 @@ extension APITest {
             "password": "swiftalps",
         ]
     }
-    
+
     func makeRandomUser() -> [String: String] {
         return [
             "email": Lorem.email,
@@ -143,7 +143,7 @@ extension APITest {
             "password": String.randomString(40),
         ]
     }
-    
+
     func makeRandomNote() -> [String: String] {
         return [
             "title": Lorem.title,

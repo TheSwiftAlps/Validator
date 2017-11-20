@@ -17,7 +17,7 @@ public struct API {
     ///
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func ping() throws -> Response {
+    public func ping() throws -> Response {
         return try engine.get("/ping")
     }
 
@@ -25,7 +25,7 @@ public struct API {
     ///
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func create(user: [String: String]) throws -> Response {
+    public func create(user: [String: String]) throws -> Response {
         return try engine.post("/api/v1/users", data: user)
     }
 
@@ -33,7 +33,7 @@ public struct API {
     ///
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func login(user: String, pass: String) throws -> Response {
+    public func login(user: String, pass: String) throws -> Response {
         engine.auth = .basic(user, pass)
         let response = try engine.post("/api/v1/login")
         if let json = response.json {
@@ -48,7 +48,7 @@ public struct API {
 
     /// Disables the RequestEngine from providing "Authorization" headers
     /// with every request to the API.
-    func logout() {
+    public func logout() {
         engine.auth = .none
     }
 
@@ -56,7 +56,7 @@ public struct API {
     ///
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func notes() throws -> Response {
+    public func notes() throws -> Response {
         return try engine.get("/api/v1/notes")
     }
 
@@ -66,7 +66,7 @@ public struct API {
     ///
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func backup() throws -> Response {
+    public func backup() throws -> Response {
         engine.accept = .zip
         let response = try engine.get("/api/v1/notes")
         engine.accept = .json
@@ -78,7 +78,7 @@ public struct API {
     /// - Parameter id: a UUID representing a single note.
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func note(id: String) throws -> Response {
+    public func note(id: String) throws -> Response {
         return try engine.get("/api/v1/notes/\(id)")
     }
 
@@ -89,7 +89,7 @@ public struct API {
     /// - Parameter id: a UUID representing a single note.
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func publish(id: String) throws -> Response {
+    public func publish(id: String) throws -> Response {
         return try engine.put("/api/v1/notes/\(id)/publish")
     }
 
@@ -98,7 +98,7 @@ public struct API {
     /// - Parameter id: a UUID representing a single note.
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func unpublish(id: String) throws -> Response {
+    public func unpublish(id: String) throws -> Response {
         return try engine.put("/api/v1/notes/\(id)/unpublish")
     }
 
@@ -109,7 +109,7 @@ public struct API {
     /// - Parameter slug: a UUID representing a single note.
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func published(slug: String) throws -> Response {
+    public func published(slug: String) throws -> Response {
         return try engine.get("/\(slug)")
     }
 
@@ -118,7 +118,7 @@ public struct API {
     /// - Parameter note: A map of string keys and string values representing a note.
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func create(note: [String: String]) throws -> Response {
+    public func create(note: [String: String]) throws -> Response {
         return try engine.post("/api/v1/notes", data: note)
     }
 
@@ -127,7 +127,7 @@ public struct API {
     /// - Parameter query: a string with the text to search.
     /// - Returns: the response of the call.
     /// - Throws: anything that the RequestEngine throws.
-    func search(query: String) throws -> Response {
+    public func search(query: String) throws -> Response {
         return try engine.post("/api/v1/notes/search", data: ["query": query])
     }
 }

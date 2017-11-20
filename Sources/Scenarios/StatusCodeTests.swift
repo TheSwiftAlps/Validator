@@ -1,5 +1,7 @@
-final public class StatusCodeTests: APITest {
-    override func scenario() -> [(String, APITest.TestMethod)]? {
+import Infrastructure
+
+final public class StatusCodeTests: BaseScenario {
+    public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
         return [
             ("Ping", ping),
         ]
