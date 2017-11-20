@@ -48,20 +48,33 @@ extension APITest {
         try expectStatusCode(.ok, response)
         try expectContentType(.json, response)
     }
-
+    
     func login() throws {
         let response = try api.login(user: email, pass: password)
         try expectStatusCode(.ok, response)
         try expectContentType(.json, response)
         if let json = response.json {
             let token = json["token"] as! String
-            try expect(token.characters.count > 0)
+            try expect(token.count > 0)
         }
         else {
             try fail("No JSON in response")
         }
     }
-
+    
+    func loginDefaultUser() throws {
+        let response = try api.login(user: "vapor@theswiftalps.com", pass: "swiftalps")
+        try expectStatusCode(.ok, response)
+        try expectContentType(.json, response)
+        if let json = response.json {
+            let token = json["token"] as! String
+            try expect(token.count > 0)
+        }
+        else {
+            try fail("No JSON in response")
+        }
+    }
+    
     func createNote() throws {
         let note = makeRandomNote()
         let response = try api.create(note: note)
@@ -128,6 +141,14 @@ extension APITest {
 
 // Utility methods
 extension APITest {
+    func makeDefaultUser() -> [String: String] {
+        return [
+            "email": "vapor@theswiftalps.com",
+            "name": "Vapor @ The Swift Alps 2017",
+            "password": "swiftalps",
+        ]
+    }
+    
     func makeRandomUser() -> [String: String] {
         return [
             "email": Lorem.email,
@@ -135,7 +156,7 @@ extension APITest {
             "password": String.randomString(40),
         ]
     }
-
+    
     func makeRandomNote() -> [String: String] {
         return [
             "title": Lorem.title,

@@ -2,17 +2,17 @@ final public class PublishingTests: APITest {
 
     override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
-            ("createUser", createUser),
-            ("login", login),
-            ("createNote", createNote),
-            ("checkNotPublished", checkNotPublished),
-            ("publishNote", publishNote),
-            ("checkPublished", checkPublished),
-            ("logout", logout),
-            ("checkPublished", checkPublished),
-            ("login", login),
-            ("unpublishNote", unpublishNote),
-            ("checkNotPublished", checkNotPublished),
+            ("Create user", createUser),
+            ("Login", login),
+            ("Create note", createNote),
+            ("Check note is not published", checkNotPublished),
+            ("Publish note", publishNote),
+            ("Check published", checkPublished),
+            ("Logout", logout),
+            ("Check published", checkPublished),
+            ("Login", login),
+            ("Unpublish note", unpublishNote),
+            ("Check not published", checkNotPublished),
         ]
     }
 

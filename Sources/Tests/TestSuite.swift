@@ -19,21 +19,21 @@ public struct TestSuite {
                 for (testName, testMethod) in scenario {
                     do {
                         try testMethod()
-                        print("Test \(testName) passed".green)
+                        print("\(testName) passed".green)
                     }
                     catch APITest.TestError<String>.failed(let message) {
-                        print("Test \(testName) failed: \(message)".red)
+                        print("\(testName) failed: \(message)".red)
                     }
                     catch APITest.TestError<Int>.notEqual(let lhs, let rhs, let message) {
-                        print("Test \(testName) failed: expected \(lhs), got \(rhs) instead.".red)
+                        print("\(testName) failed: expected \(lhs), got \(rhs) instead.".red)
                         print("    Note: \(message)".red)
                     }
                     catch APITest.TestError<String>.notEqual(let lhs, let rhs, let message) {
-                        print("Test \(testName) failed: expected \(lhs), got \(rhs) instead.".red)
+                        print("\(testName) failed: expected \(lhs), got \(rhs) instead.".red)
                         print("    Note: \(message)".red)
                     }
                     catch {
-                        print("Test \(testName) threw error: \(error)".red)
+                        print("\(testName) threw error: \(error)".red)
                     }
                 }
             }

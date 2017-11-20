@@ -2,10 +2,10 @@ public final class SearchTests: APITest {
 
     override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
-            ("createUser", createUser),
-            ("login", login),
-            ("createManyNotes", createManyNotes),
-            ("search", search),
+            ("Create user", createUser),
+            ("Login", login),
+            ("Create many notes", createManyNotes),
+            ("Search", search),
         ]
     }
 

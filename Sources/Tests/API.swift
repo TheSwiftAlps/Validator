@@ -1,8 +1,12 @@
 import RequestEngine
 
+/// Wraps the target API that must be validated.
 public struct API {
     let engine: RequestEngine
 
+    /// Initializes a new instance.
+    ///
+    /// - Parameter engine: A RequestEngine instance.
     init(_ engine: RequestEngine) {
         self.engine = engine
     }

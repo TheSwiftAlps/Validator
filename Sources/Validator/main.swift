@@ -14,6 +14,7 @@ let server = CommandLine.arguments[1]
 let tests = [
     StatusCodeTests.self,
     UserTests.self,
+    DefaultUserTests.self,
     PublishingTests.self,
     SearchTests.self,
 ]

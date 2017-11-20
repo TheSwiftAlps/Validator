@@ -4,9 +4,13 @@ import Foundation
 import Dispatch
 #endif
 
-// Adapted from
-// https://stackoverflow.com/a/34308158/133764
 extension URLSession {
+    /// Sends an HTTP request synchronously. This method blocks!
+    /// Adapted from
+    /// https://stackoverflow.com/a/34308158/133764
+    ///
+    /// - Parameter request: The URL request to send.
+    /// - Returns: A Response object with the results of the request.
     func send(_ request: URLRequest) -> Response {
         var data: Data?
         var response: URLResponse?

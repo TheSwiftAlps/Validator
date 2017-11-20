@@ -2,17 +2,18 @@ import Foundation
 
 final public class UserTests: APITest {
     var notesCount = 0
+    let LOCAL_PATH = "/Users/akosma/Desktop/archive.zip"
 
     override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
-            ("createUser", createUser),
-            ("login", login),
-            ("countNotes", countNotes),
-            ("createManyNotes", createManyNotes),
-            ("getNote", getNote),
-            ("backupNotes", backupNotes),
-            ("countNotes", countNotes),
-            ("logout", logout),
+            ("Create user", createUser),
+            ("Login", login),
+            ("Count notes", countNotes),
+            ("Create many notes", createManyNotes),
+            ("Get note", getNote),
+            ("Backup notes", backupNotes),
+            ("Count notes", countNotes),
+            ("Logout", logout),
         ]
     }
 
@@ -38,7 +39,7 @@ final public class UserTests: APITest {
         let response = try api.backup()
         try expectStatusCode(.ok, response)
         try expectContentType(.zip, response)
-        let url = URL(fileURLWithPath:"/home/akosma/Desktop/archive.zip")
+        let url = URL(fileURLWithPath: LOCAL_PATH)
         try response.save(at: url)
     }
 

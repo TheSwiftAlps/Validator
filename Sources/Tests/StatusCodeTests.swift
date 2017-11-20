@@ -1,7 +1,7 @@
 final public class StatusCodeTests: APITest {
     override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
-            ("ping", ping),
+            ("Ping", ping),
         ]
     }
 
