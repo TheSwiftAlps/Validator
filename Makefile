@@ -2,7 +2,8 @@ all: build docs
 
 clean:
 	swift package clean; \
-	rm -rf docs;
+	rm -rf docs; \
+	rm -rf Validator.xcodeproj;
 
 build:
 	swift build;
@@ -20,4 +21,7 @@ docs: build
 
 run: build
 	.build/debug/Validator http://localhost
+
+xcode:
+	swift package generate-xcodeproj
 

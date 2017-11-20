@@ -11,11 +11,10 @@ This project is a [standard Swift 4 package](https://swift.org/package-manager/)
 - `make` will build the application and the documentation.
 - `make build` will build the application, downloading the dependencies if required.
 - `make doc` will create the documentation using Jazzy.
+- `make xcode` will create an Xcode project.
 - `make run` will run the debug version of the application against `http://localhost`
 
-You can run the project against any other URL:
-
-`.build/debug/Validator http://server.somewhere.com`
+You can run the project against any other URL: `.build/debug/Validator http://server.somewhere.com`
 
 ## Specification
 
