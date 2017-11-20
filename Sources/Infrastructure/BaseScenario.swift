@@ -17,8 +17,14 @@ open class BaseScenario {
     /// The UUID of the current note being requested or manipulated.
     public var noteUUID: String? = nil
 
-    /// The slug of the public note being requested.
-    public var slug: String? = nil
+    /// The slug of the current note being requested or manipulated.
+    public var noteSlug: String? = nil
+    
+    /// The contents of the current note being requested or manipulated.
+    public var noteContents: String? = nil
+    
+    /// The title of the current note being requested or manipulated.
+    public var noteTitle: String? = nil
 
     /// The API wrapper object used to connect to the backend.
     public let api: API
@@ -112,7 +118,9 @@ extension BaseScenario {
         if let json = response.json {
             let data = json["data"] as! [String: Any]
             noteUUID = data["id"] as? String
-            slug = data["slug"] as? String
+            noteSlug = data["slug"] as? String
+            noteContents = data["contents"] as? String
+            noteTitle = data["title"] as? String
             try expectStatusCode(.ok, response)
             try expectContentType(.json, response)
         }
