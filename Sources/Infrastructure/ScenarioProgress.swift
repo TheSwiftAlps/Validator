@@ -6,7 +6,10 @@ import Foundation
 /// - info: Message indicating information.
 /// - error: Message indicating an error.
 public enum ScenarioProgress {
+    /// Message indicating success.
     case success(message: String)
+    /// Message indicating information.
     case info(message: String)
+    /// Message indicating an error.
     case error(message: String)
 }

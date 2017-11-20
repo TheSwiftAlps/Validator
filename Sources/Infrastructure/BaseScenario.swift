@@ -10,7 +10,7 @@ import LoremSwiftum
 open class BaseScenario {
     /// The e-mail used to connect to the backend.
     public var email = ""
-    
+
     /// The password used to connect to the backend.
     public var password = ""
 
@@ -19,10 +19,10 @@ open class BaseScenario {
 
     /// The slug of the current note being requested or manipulated.
     public var noteSlug: String? = nil
-    
+
     /// The contents of the current note being requested or manipulated.
     public var noteContents: String? = nil
-    
+
     /// The title of the current note being requested or manipulated.
     public var noteTitle: String? = nil
 
@@ -39,7 +39,9 @@ open class BaseScenario {
     /// - failed: Assertion has failed. The associated value is a description of the error.
     /// - notEqual: Raised when the two first associated values are not equal to each other.
     public enum TestError<T: Equatable> : Error {
+        /// Assertion has failed. The associated value is a description of the error.
         case failed(String)
+        /// Raised when the two first associated values are not equal to each other.
         case notEqual(T, T, String)
     }
 
@@ -218,7 +220,7 @@ extension BaseScenario {
         }
         throw TestError<String>.failed(message)
     }
-    
+
     /// Throws an error if a specific header is not available in the response.
     ///
     /// - Parameter response: The response received from the server.

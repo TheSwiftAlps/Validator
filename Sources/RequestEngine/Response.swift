@@ -24,7 +24,7 @@ public struct Response {
 
     /// All the headers returned by the server.
     public let headers: [AnyHashable: Any]?
-    
+
     /// Possible status codes in responses
     ///
     /// - invalid: no valid value
@@ -33,13 +33,18 @@ public struct Response {
     /// - error: HTTP 500
     /// - notAuthorized: HTTP 401
     public enum StatusCode: Int {
+        /// No valid value
         case invalid = 0
+        /// HTTP 200
         case ok = 200
+        /// HTTP 404
         case notFound = 404
+        /// HTTP 500
         case error = 500
+        /// HTTP 401
         case notAuthorized = 401
     }
-    
+
     /// Initializer.
     ///
     /// - Parameters:
@@ -49,7 +54,7 @@ public struct Response {
     init(_ data: Data?, _ response: URLResponse?, _ error: Error?) {
         let resp = response as? HTTPURLResponse
         let statusCode = resp?.statusCode ?? 0
-        
+
         self.status = StatusCode(rawValue: statusCode) ?? .invalid
         self.headers = resp?.allHeaderFields
         self.contentType = resp?.allHeaderFields["Content-Type"] as? String ??  "Unknown content type"

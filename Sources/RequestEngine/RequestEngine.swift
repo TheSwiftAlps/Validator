@@ -12,8 +12,11 @@ public final class RequestEngine {
     /// - basic: HTTP Basic Authentication type (RFC 2617).
     /// - token: HTTP Token Authentication type (RFC 6750).
     public enum AuthenticationType {
+        /// No authentication.
         case none
+        /// HTTP Basic Authentication type (RFC 2617).
         case basic(String, String)
+        /// HTTP Token Authentication type (RFC 6750).
         case token(String)
 
         /// Returns the "Authorization" HTTP header that corresponds to
@@ -59,14 +62,18 @@ public final class RequestEngine {
 
     /// The possible HTTP request methods used by the RequestEngine.
     ///
-    /// - post: The POST method, usually for creation purposes.
-    /// - get: The GET method, usually for query purposes.
-    /// - put: The PUT method, usually for modification purposes.
-    /// - delete: The DELETE method, usually for deletion purposes.
+    /// - post: POST method, usually for creation purposes.
+    /// - get: GET method, usually for query purposes.
+    /// - put: PUT method, usually for modification purposes.
+    /// - delete: DELETE method, usually for deletion purposes.
     public enum RequestMethod: String {
+        /// POST method, usually for creation purposes.
         case post = "POST"
+        /// GET method, usually for query purposes.
         case get = "GET"
+        /// PUT method, usually for modification purposes.
         case put = "PUT"
+        /// DELETE method, usually for deletion purposes.
         case delete = "DELETE"
     }
 
@@ -74,6 +81,7 @@ public final class RequestEngine {
     ///
     /// - cannotConvertStringToURL: Thrown when the endpoint URL cannot be build properly.
     public enum LocalError: Error {
+        /// Thrown when the endpoint URL cannot be build properly.
         case cannotConvertStringToURL
     }
 
@@ -83,20 +91,23 @@ public final class RequestEngine {
     /// - zip: ZIP MIME type
     /// - html: HTML MIME type
     public enum MimeType: String {
+        /// JSON MIME type
         case json = "application/json; charset=utf-8"
+        /// ZIP MIME type
         case zip = "application/zip"
+        /// HTML MIME type
         case html = "text/html; charset=utf-8"
     }
-    
+
     /// The base URL of the server this component is connecting to.
     private let baseURL: URL
 
     /// A URLSession object used to channel all requests.
     private let session: URLSession
-    
+
     /// The type of authentication for the next requests.
     public var auth = AuthenticationType.none
-    
+
     /// The value of the "Content-Type" header to be sent with each request.
     public var contentType = MimeType.json
 
