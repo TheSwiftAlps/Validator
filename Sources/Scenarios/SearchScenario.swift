@@ -23,6 +23,7 @@ public final class SearchScenario: BaseScenario {
             let notes = json["data"] as! [Any]
             try expectStatusCode(.ok, response)
             try expectContentType(.json, response)
+            try expectSwiftAlpsVersionHeader(response)
             try expect(notes.count > 0)
         }
         else {
