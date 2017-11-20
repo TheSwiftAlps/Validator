@@ -3,6 +3,10 @@ import RequestEngine
 import LoremSwiftum
 
 /// Base class for all scenarios of interaction with the API.
+/// This class is meant to be subclassed. Subclasses *must* override the
+/// `scenario()` method, returning a dictionary mapping strings to
+/// methods within the subclass instance.
+/// This class provides ready-to-use methods to create users and notes.
 open class BaseScenario {
     /// The e-mail used to connect to the backend.
     public var email = ""
