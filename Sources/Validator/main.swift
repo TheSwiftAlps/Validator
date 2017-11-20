@@ -4,6 +4,12 @@ import Scenarios
 import Rainbow
 import Commander
 
+// Exit codes:
+// 0: no errors.
+// 1: Wrong value to the --scenario parameter.
+// 2: Invalid server parameter.
+// 3: Normal execution but some tests failed.
+
 #if os(Linux)
 // Required in Linux to initialize the random number generator.
 // The arc4random() family of functions is not available
@@ -57,7 +63,7 @@ let main = command(argument, scenarioOption) { server, chosenScenario in
         let message = "Executed \(stats.scenarios) scenarios with \(stats.tests) tests: \(stats.passed) passed, \(stats.failed) failed.\n"
         if stats.failed > 0 {
             print(message.red)
-            exit(1)
+            exit(3)
         }
         else {
             print(message.green)
@@ -66,7 +72,7 @@ let main = command(argument, scenarioOption) { server, chosenScenario in
     }
     else {
         print("Invalid parameter (\(server))".red)
-        exit(3)
+        exit(2)
     }
 }
 
