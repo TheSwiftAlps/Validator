@@ -7,13 +7,13 @@ import RequestEngine
 public struct ScenarioSuite {
     /// Holds a collection of scenarios to be executed in sequence.
     let scenarios: [BaseScenario.Type]
-    
+
     /// Callback used by the "run()" method.
     public typealias RunCallback = (ScenarioProgress) -> Void
 
     /// The API object onto which the scenarios will be run.
     let api: API
-    
+
     /// Initializes a new scenario suite.
     ///
     /// - Parameters:
