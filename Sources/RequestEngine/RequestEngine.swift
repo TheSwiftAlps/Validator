@@ -81,11 +81,13 @@ public final class RequestEngine {
     ///
     /// - json: JSON MIME type
     /// - zip: ZIP MIME type
+    /// - html: HTML MIME type
     public enum MimeType: String {
         case json = "application/json; charset=utf-8"
         case zip = "application/zip"
+        case html = "text/html; charset=utf-8"
     }
-
+    
     private let baseURL: String
     private let session: URLSession
     public var auth = AuthenticationType.none
