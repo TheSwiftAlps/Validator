@@ -210,6 +210,14 @@ extension BaseScenario {
         }
         throw TestError<String>.failed(message)
     }
+    
+    /// Throws an error if a specific header is not available in the response.
+    ///
+    /// - Parameter response: The response received from the server.
+    /// - Throws: A TestError instance.
+    public func expectSwiftAlpsVersionHeader(_ response: Response) throws {
+        try expectHeader("Version", "Swift Alps 2017 - Notes API 1.0", response)
+    }
 }
 
 // MARK: - Utility private methods
