@@ -3,6 +3,7 @@ import Infrastructure
 import Scenarios
 import Rainbow
 
+// Main entry point of the Validator application.
 // Exit codes of this program:
 // 0: success.
 // 1: At least one test in at least one scenario failed.
