@@ -25,7 +25,7 @@ if CommandLine.arguments.count < 2 {
 let server = CommandLine.arguments[1]
 if let url = URL(string: server) {
     let scenarios = [
-            StatusCodeScenario.self,
+            PingScenario.self,
             UserScenario.self,
             DefaultUserScenario.self,
             PublishingScenario.self,
