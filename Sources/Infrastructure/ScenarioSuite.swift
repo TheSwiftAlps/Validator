@@ -76,6 +76,7 @@ public struct ScenarioSuite {
                         failed += 1
                     }
                 }
+                callback(.info(message: ""))
             }
             else {
                 callback(.info(message: "No tests for this scenario: \(type(of: scenarioObj))"))
