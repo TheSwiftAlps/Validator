@@ -1,7 +1,9 @@
 import Foundation
 import RequestEngine
 
-/// Holds and executes a set of scenarios.
+/// A scenario suite holds and executes a set of scenarios. A scenario is a
+/// subclass of BaseScenario, itself exposing a `scenario()` method returning
+/// a dictionary of Strings mapping to TestMethod instances.
 public struct ScenarioSuite {
     /// Holds a collection of scenarios to be executed in sequence.
     let scenarios: [BaseScenario.Type]
@@ -34,17 +36,22 @@ public struct ScenarioSuite {
         self.scenarios = scenarios
     }
 
+    /// Main scenario runner. This method iterates over the set of scenarios,
+    /// and for each scenario it executes the complete sequence of tests included within.
+    ///
+    /// - Parameter callback: A callback method taking a ScenarioProgress instance as parameter.
+    /// - Returns: An instance of SuiteStats with statistics about the scenario run.
     public func run(callback: RunCallback) -> SuiteStats {
         var scenariosCount = 0
         var tests = 0
         var passed = 0
         var failed = 0
         for scenarioClass in scenarios {
-            let scenarioCase = scenarioClass.init(api: self.api)
-            if let scenario = scenarioCase.scenario(), scenario.count > 0 {
+            let scenarioObj = scenarioClass.init(api: self.api)
+            if let scenarioTests = scenarioObj.scenario(), scenarioTests.count > 0 {
                 scenariosCount += 1
-                callback(.info(message: "Processing scenario: \(type(of: scenarioCase))"))
-                for (testName, testMethod) in scenario {
+                callback(.info(message: "Processing scenario: \(type(of: scenarioObj))"))
+                for (testName, testMethod) in scenarioTests {
                     tests += 1
                     do {
                         try testMethod()
@@ -71,9 +78,9 @@ public struct ScenarioSuite {
                 }
             }
             else {
-                callback(.info(message: "No tests for this scenario: \(type(of: scenarioCase))"))
+                callback(.info(message: "No tests for this scenario: \(type(of: scenarioObj))"))
             }
         }
-        return SuiteStats(scenariosCount, tests, passed, failed)
+        return SuiteStats(scenarios: scenariosCount, tests: tests, passed: passed, failed: failed)
     }
 }
