@@ -7,7 +7,7 @@ extension Int {
     public func randomFromZeroToMe() -> Int {
         #if os(Linux)
             // Nope, no arc4random outside of BSD...
-            return Int(UInt32(random()) % self)
+            return Int(random() % self)
         #else
             return Int(arc4random_uniform(UInt32(self)))
         #endif
