@@ -3,6 +3,7 @@ import Infrastructure
 /// Test Anything Protocol reporter, based on the specification at
 /// https://testanything.org/
 class TapReporter: RunReporter {
+    var stats: SuiteStats? = nil
     var output = ""
     var count = 0
 
@@ -25,5 +26,9 @@ class TapReporter: RunReporter {
 
     func display() -> String {
         return "1..\(count)\n\(output)"
+    }
+
+    func add(stats: SuiteStats) {
+        self.stats = stats
     }
 }

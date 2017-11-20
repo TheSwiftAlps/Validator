@@ -38,7 +38,7 @@ public struct ScenarioSuite {
     ///
     /// - Parameter reporter: A RunReporter method collecting ScenarioProgress instances.
     /// - Returns: An instance of SuiteStats with statistics about the scenario run.
-    public func run(reporter: RunReporter) -> SuiteStats {
+    public func run(reporter: RunReporter) {
         var scenariosCount = 0
         var tests = 0
         var passed = 0
@@ -79,6 +79,7 @@ public struct ScenarioSuite {
                 reporter.report(progress: .info(message: "No tests for this scenario: \(type(of: scenarioObj))"))
             }
         }
-        return SuiteStats(scenarios: scenariosCount, tests: tests, passed: passed, failed: failed)
+        let stats = SuiteStats(scenarios: scenariosCount, tests: tests, passed: passed, failed: failed)
+        reporter.add(stats: stats)
     }
 }

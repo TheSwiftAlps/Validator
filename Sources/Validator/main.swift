@@ -43,27 +43,18 @@ let main = command(argument, scenarioOption, outputOption) { server, chosenScena
             exit(1)
         }
 
-        // Create a suite and run it; publish the progress as it happens
+        // Create a suite and run it; create a reporter to show how it went.
         let suite = ScenarioSuite(server: url, scenarios: scenarios)
 
         var reporter: RunReporter = StandardReporter()
         if output == "tap" {
             reporter = TapReporter()
         }
-        let stats = suite.run(reporter: reporter)
+        else if output == "junit" {
+            reporter = JUnitReporter()
+        }
+        suite.run(reporter: reporter)
         print(reporter.display())
-
-        // Show stats at the end
-        print("\n---")
-        let message = "Executed \(stats.scenarios) scenarios with \(stats.tests) tests: \(stats.passed) passed, \(stats.failed) failed.\n"
-        if stats.failed > 0 {
-            print(message.red)
-            exit(3)
-        }
-        else {
-            print(message.green)
-            exit(0)
-        }
     }
     else {
         print("Invalid parameter (\(server))".red)
