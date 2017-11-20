@@ -1,13 +1,14 @@
+/// Structure holding the results of a ScenarioSuite run.
 public struct SuiteStats {
+    /// The number of scenarios run.
     public let scenarios: Int
+
+    /// The number of tests aggregated across all scenarios.
     public let tests: Int
-    public let passed: Int
-    public let failed: Int
     
-    init(_ scenarios: Int, _ tests: Int, _ passed: Int, _ failed: Int) {
-        self.scenarios = scenarios
-        self.tests = tests
-        self.passed = passed
-        self.failed = failed
-    }
+    /// The number of successful tests.
+    public let passed: Int
+
+    /// The number of failed tests.
+    public let failed: Int
 }
