@@ -39,6 +39,10 @@ final public class UserScenario: BaseScenario {
             ("Get note", getNote),
             ("Backup notes", backupNotes),
             ("Count notes", countNotes),
+            ("Delete note", deleteNote),
+            ("Count one note less", countNotes),
+            ("Delete all notes", deleteAllNotes),
+            ("Count zero notes", countNotes),
             ("Logout", logout),
         ]
     }
@@ -95,6 +99,31 @@ final public class UserScenario: BaseScenario {
         else {
             try fail("No JSON in response")
         }
+    }
+    
+    /// Deletes the note specified by its ID.
+    ///
+    /// - Throws: whatever the underlying system throws.
+    func deleteNote() throws {
+        if let id = noteUUID {
+            let response = try api.delete(id: id)
+            try expectStatusCode(.ok, response)
+            try expectSwiftAlpsVersionHeader(response)
+            notesCount -= 1
+        }
+        else {
+            try fail("No ID to retrieve note")
+        }
+    }
+    
+    /// Deletes all the notes of the current user.
+    ///
+    /// - Throws: whatever the underlying system throws.
+    func deleteAllNotes() throws {
+        let response = try api.delete()
+        try expectStatusCode(.ok, response)
+        try expectSwiftAlpsVersionHeader(response)
+        notesCount = 0
     }
 }
 

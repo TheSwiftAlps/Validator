@@ -122,6 +122,23 @@ public struct API {
     public func create(note: [String: String]) throws -> Response {
         return try engine.post("/api/v1/notes", data: note)
     }
+    
+    /// Performs a "DELETE /api/v1/notes/UUID" request.
+    ///
+    /// - Parameter id: a UUID representing a single note.
+    /// - Returns: the response of the call.
+    /// - Throws: anything that the RequestEngine throws.
+    public func delete(id: String) throws -> Response {
+        return try engine.delete("/api/v1/notes/\(id)")
+    }
+    
+    /// Performs a "DELETE /api/v1/notes" request. This deletes ALL notes from the current user.
+    ///
+    /// - Returns: the response of the call.
+    /// - Throws: anything that the RequestEngine throws.
+    public func delete() throws -> Response {
+        return try engine.delete("/api/v1/notes")
+    }
 
     /// Performs a "POST /api/v1/notes/search" request.
     ///
