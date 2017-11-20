@@ -9,17 +9,11 @@ extension String {
     /// - Returns: A random string.
     public static func randomString(_ length: Int) -> String {
         let allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let allowedCharsCount = UInt32(allowedChars.count)
+        let allowedCharsCount = allowedChars.count
         var randomString = ""
 
         for _ in 0..<length {
-            #if os(Linux)
-            // Nope, no arc4random outside of BSD...
-            let randomNum = Int(UInt32(random()) % allowedCharsCount)
-            #else
-            let randomNum = Int(arc4random_uniform(allowedCharsCount))
-            #endif
-
+            let randomNum = allowedCharsCount.randomFromZeroToMe()
             let randomIndex = allowedChars.index(allowedChars.startIndex, offsetBy: randomNum)
             let newCharacter = allowedChars[randomIndex]
             randomString += String(newCharacter)
