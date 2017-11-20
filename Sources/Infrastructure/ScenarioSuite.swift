@@ -8,9 +8,6 @@ public struct ScenarioSuite {
     /// Holds a collection of scenarios to be executed in sequence.
     let scenarios: [BaseScenario.Type]
 
-    /// Callback used by the "run()" method.
-    public typealias RunCallback = (ScenarioProgress) -> Void
-
     /// The API object onto which the scenarios will be run.
     let api: API
 
@@ -39,9 +36,9 @@ public struct ScenarioSuite {
     /// Main scenario runner. This method iterates over the set of scenarios,
     /// and for each scenario it executes the complete sequence of tests included within.
     ///
-    /// - Parameter callback: A callback method taking a ScenarioProgress instance as parameter.
+    /// - Parameter reporter: A RunReporter method collecting ScenarioProgress instances.
     /// - Returns: An instance of SuiteStats with statistics about the scenario run.
-    public func run(callback: RunCallback) -> SuiteStats {
+    public func run(reporter: RunReporter) -> SuiteStats {
         var scenariosCount = 0
         var tests = 0
         var passed = 0
@@ -50,36 +47,36 @@ public struct ScenarioSuite {
             let scenarioObj = scenarioClass.init(api: self.api)
             if let scenarioTests = scenarioObj.scenario(), scenarioTests.count > 0 {
                 scenariosCount += 1
-                callback(.info(message: "Processing scenario: \(type(of: scenarioObj))"))
+                reporter.report(progress: .info(message: "Processing scenario: \(type(of: scenarioObj))"))
                 for (testName, testMethod) in scenarioTests {
                     tests += 1
                     do {
                         try testMethod()
-                        callback(.success(message: "\(testName) passed"))
+                        reporter.report(progress: .success(message: "\(testName) passed"))
                         passed += 1
                     }
                     catch BaseScenario.TestError<String>.failed(let message) {
-                        callback(.error(message: "\(testName) failed: \(message)"))
+                        reporter.report(progress: .error(message: "\(testName) failed: \(message)"))
                     }
                     catch BaseScenario.TestError<Int>.notEqual(let lhs, let rhs, let message) {
-                        callback(.error(message: "\(testName) failed: expected \(lhs), got \(rhs) instead."))
-                        callback(.error(message: "    Note: \(message)"))
+                        reporter.report(progress: .error(message: "\(testName) failed: expected \(lhs), got \(rhs) instead."))
+                        reporter.report(progress: .error(message: "    Note: \(message)"))
                     }
                     catch BaseScenario.TestError<String>.notEqual(let lhs, let rhs, let message) {
-                        callback(.error(message: "\(testName) failed: expected \(lhs), got \(rhs) instead."))
-                        callback(.error(message: "    Note: \(message)"))
+                        reporter.report(progress: .error(message: "\(testName) failed: expected \(lhs), got \(rhs) instead."))
+                        reporter.report(progress: .error(message: "    Note: \(message)"))
                     }
                     catch {
-                        callback(.error(message: "\(testName) threw error: \(error)"))
+                        reporter.report(progress: .error(message: "\(testName) threw error: \(error)"))
                     }
                     if passed == 0 {
                         failed += 1
                     }
                 }
-                callback(.info(message: ""))
+                reporter.report()
             }
             else {
-                callback(.info(message: "No tests for this scenario: \(type(of: scenarioObj))"))
+                reporter.report(progress: .info(message: "No tests for this scenario: \(type(of: scenarioObj))"))
             }
         }
         return SuiteStats(scenarios: scenariosCount, tests: tests, passed: passed, failed: failed)

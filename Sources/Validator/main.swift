@@ -29,9 +29,12 @@ let keys = validKeys(list: scenarioList)
 let scenarioOptionDescription = "Name of the scenario to execute: all, \(keys)"
 let scenarioOption = Option("scenario", default: "all", description: scenarioOptionDescription)
 
+let outputOptionDescription = "Type of output: junit, standard, tap"
+let outputOption = Option("output", default: "standard", description: outputOptionDescription)
+
 let argument = Argument<String>("server", description: "The server being tested.")
 
-let main = command(argument, scenarioOption) { server, chosenScenario in
+let main = command(argument, scenarioOption, outputOption) { server, chosenScenario, output in
     if let url = URL(string: server) {
         // Filter the list of scenarios
         let scenarios = filterScenarios(chosen: chosenScenario, list: scenarioList)
@@ -42,16 +45,13 @@ let main = command(argument, scenarioOption) { server, chosenScenario in
 
         // Create a suite and run it; publish the progress as it happens
         let suite = ScenarioSuite(server: url, scenarios: scenarios)
-        let stats = suite.run { progress in
-            switch progress {
-            case ScenarioProgress.success(let text):
-                print(text.green)
-            case ScenarioProgress.info(let text):
-                print(text.yellow)
-            case ScenarioProgress.error(let text):
-                print(text.red)
-            }
+
+        var reporter: RunReporter = StandardReporter()
+        if output == "tap" {
+            reporter = TapReporter()
         }
+        let stats = suite.run(reporter: reporter)
+        print(reporter.display())
 
         // Show stats at the end
         print("\n---")
