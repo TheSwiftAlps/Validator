@@ -1,3 +1,4 @@
+import Foundation
 import Rainbow
 import RequestEngine
 
@@ -6,7 +7,18 @@ public struct TestSuite {
     let api: API
 
     public init(server: String, tests: [APITest.Type]) {
-        let engine = RequestEngine(server)
+        
+        let configuration: URLSessionConfiguration
+        configuration = URLSessionConfiguration.default
+        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
+        configuration.timeoutIntervalForRequest = 10
+        configuration.timeoutIntervalForResource = 20
+        
+        let session = URLSession(configuration: configuration,
+                             delegate: nil,
+                             delegateQueue: OperationQueue())
+
+        let engine = RequestEngine(server, session: session)
         self.api = API(engine)
         self.tests = tests
     }

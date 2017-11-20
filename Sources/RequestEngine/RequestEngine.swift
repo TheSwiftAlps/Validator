@@ -88,7 +88,6 @@ public final class RequestEngine {
 
     private let baseURL: String
     private let session: URLSession
-    private let configuration: URLSessionConfiguration
     public var auth = AuthenticationType.none
     public var contentType = MimeType.json
     public var accept = MimeType.json
@@ -97,17 +96,9 @@ public final class RequestEngine {
     ///
     /// - Parameter baseURL: The base URL for this component, like `http://server.com`
     ///                      (without a trailing slash)
-    public init(_ baseURL: String) {
+    public init(_ baseURL: String, session: URLSession) {
         self.baseURL = baseURL
-
-        configuration = URLSessionConfiguration.default
-        configuration.requestCachePolicy = .reloadIgnoringLocalCacheData
-        configuration.timeoutIntervalForRequest = 10
-        configuration.timeoutIntervalForResource = 20
-
-        session = URLSession(configuration: configuration,
-            delegate: nil,
-            delegateQueue: OperationQueue())
+        self.session = session
     }
 }
 
