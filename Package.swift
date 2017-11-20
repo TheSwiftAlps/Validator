@@ -13,12 +13,12 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/onevcat/Rainbow.git", from: "2.1.0"),
         .package(url: "https://github.com/iamjono/LoremSwiftum.git", from: "0.0.3"),
-
+        .package(url: "https://github.com/kylef/Commander.git", from: "0.8.0"),
     ],
     targets: [
         .target(name: "RequestEngine", dependencies: []),
         .target(name: "Infrastructure", dependencies: ["RequestEngine", "LoremSwiftum"]),
         .target(name: "Scenarios", dependencies: ["Infrastructure"]),
-        .target(name: "Validator", dependencies: ["Scenarios", "Rainbow"]),
+        .target(name: "Validator", dependencies: ["Scenarios", "Rainbow", "Commander"]),
     ]
 )

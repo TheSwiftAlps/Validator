@@ -1,4 +1,4 @@
-all: build docs
+all: build
 
 clean:
 	swift package clean; \

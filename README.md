@@ -35,6 +35,15 @@ The Vapor Notes API has the following characteristics:
 - Users can request a backup of their notes in ZIP format. The ZIP file contains a file per note, whose filename is the UUID of the note with the `.txt` extension. Each file contains the Markdown source of the note.
 - Users can search their notes for the occurrence of a string.
 
+## Dependencies
+
+This script depends on the following libraries:
+
+- [Commander](https://github.com/kylef/Commander)
+- [LoremSwiftum](https://github.com/iamjono/LoremSwiftum)
+- [Rainbow](https://github.com/onevcat/Rainbow)
+- [ZIP Foundation](https://github.com/weichsel/ZIPFoundation)
+
 ## Slides
 
 The slides of the presentation of the project are in [Gitpitch](https://gitpitch.com/akosma/validator?grs=bitbucket).
