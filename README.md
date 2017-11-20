@@ -4,6 +4,19 @@ This application is a suite of HTTP unit tests to validate the structure and beh
 
 It was created as part of the Vapor workshop in [Swift Alps 2017](https://theswiftalps.com/).
 
+## Structure
+
+This project is a [standard Swift 4 package](https://swift.org/package-manager/). It has a `Makefile` to simplify some tasks:
+
+- `make` will build the application and the documentation.
+- `make build` will build the application, downloading the dependencies if required.
+- `make doc` will create the documentation using Jazzy.
+- `make run` will run the debug version of the application against `http://localhost`
+
+You can run the project against any other URL:
+
+`.build/debug/Validator http://server.somewhere.com`
+
 ## Specification
 
 The Vapor Notes API has the following characteristics:
