@@ -18,3 +18,6 @@ docs: build
 	jazzy; \
 	rm *.json;
 
+run: build
+	.build/debug/Validator http://localhost
+
