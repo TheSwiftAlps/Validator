@@ -16,12 +16,6 @@ This project is a [standard Swift 4 package](https://swift.org/package-manager/)
 
 You can run the project against any other URL: `.build/debug/Validator http://server.somewhere.com`
 
-## Running
-
-Click on the link below to see a sample run of the validator on a working copy of the API:
-
-[![asciicast](https://asciinema.org/a/RVYs15fDgy9xTtwdAhbcgB3NI.png)](https://asciinema.org/a/RVYs15fDgy9xTtwdAhbcgB3NI)
-
 ## Specification
 
 The Vapor Notes API has the following characteristics:
@@ -41,6 +35,10 @@ The Vapor Notes API has the following characteristics:
 - Users can request a backup of their notes in ZIP format. The ZIP file contains a file per note, whose filename is the UUID of the note with the `.txt` extension. Each file contains the Markdown source of the note.
 - Users can search their notes for the occurrence of a string.
 
+## Slides
+
+The slides of the presentation of the project are in [Gitpitch](https://gitpitch.com/akosma/validator?grs=bitbucket).
+
 ## Documentation
 
 To generate the documentation of this project, you need the following things:
@@ -48,4 +46,10 @@ To generate the documentation of this project, you need the following things:
 - [jq](https://stedolan.github.io/jq/): `brew install jq`
 - [Sourcekitten](https://github.com/jpsim/SourceKitten): `brew install sourcekitten`
 - [Jazzy](https://github.com/realm/jazzy): `gem install jazzy`
+
+## Demo
+
+Click on the link below to see a sample run of the validator on a working copy of the API:
+
+[![asciicast](https://asciinema.org/a/RVYs15fDgy9xTtwdAhbcgB3NI.png)](https://asciinema.org/a/RVYs15fDgy9xTtwdAhbcgB3NI)
 
