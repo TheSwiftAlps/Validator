@@ -1,0 +1,13 @@
+clean: true
+author: Adrian Kosmaczewski
+author_url: https://akos.ma
+copyright: 2017 © Adrian Kosmaczewski – All Rights Reserved
+github_url: https://bitbucket.org/akosma/validator
+module_version: 1.0
+sourcekitten_sourcefile: jazzy.json
+skip_undocumented: false
+min_acl: private
+output: docs
+readme: README.md
+theme: fullwidth
+
