@@ -190,14 +190,6 @@ extension BaseScenario {
         }
     }
 
-    ///
-    /// - Parameters:
-    ///   - expected: The expected header.
-    ///   - received: The actual status code received from the server.
-    ///   - message: A message to be displayed to the user.
-    /// - Throws: A TestError instance.
-    
-    
     /// Throws an error if the response does not include a specific header.
     ///
     /// - Parameters:
