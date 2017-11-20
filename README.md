@@ -16,6 +16,12 @@ This project is a [standard Swift 4 package](https://swift.org/package-manager/)
 
 You can run the project against any other URL: `.build/debug/Validator http://server.somewhere.com`
 
+## Running
+
+Click on the link below to see a sample run of the validator on a working copy of the API:
+
+[![asciicast](https://asciinema.org/a/RVYs15fDgy9xTtwdAhbcgB3NI.png)](https://asciinema.org/a/RVYs15fDgy9xTtwdAhbcgB3NI)
+
 ## Specification
 
 The Vapor Notes API has the following characteristics:
