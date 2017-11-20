@@ -1,6 +1,6 @@
 import Infrastructure
 
-final public class StatusCodeTests: BaseScenario {
+final public class StatusCodeScenario: BaseScenario {
     public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
         return [
             ("Ping", ping),

@@ -1,7 +1,7 @@
 import Foundation
 import Infrastructure
 
-final public class UserTests: BaseScenario {
+final public class UserScenario: BaseScenario {
     var notesCount = 0
 
     var desktopPath: String {

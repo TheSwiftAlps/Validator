@@ -1,6 +1,6 @@
 import Infrastructure
 
-final public class PublishingTests: BaseScenario {
+final public class PublishingScenario: BaseScenario {
 
     public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
         return [

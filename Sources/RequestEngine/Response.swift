@@ -4,12 +4,25 @@ import Foundation
 /// This class wraps the URLResponse returned by the URLSession
 /// call and automatically performs JSON deserialization and other tasks.
 public struct Response {
+    /// The status code returned by the server.
     public let status: StatusCode
+
+    /// The value of the "Content-Type" header returned by the server.
     public let contentType: String
+
+    /// An eventual error returned by URLSession when performing the request.
     public let error: Error?
+
+    /// The actual JSON data, ready to be used.
     public let json: [String: Any]?
+
+    /// The string data sent by the server.
     public let string: String?
+
+    /// The raw binary data sent by the server.
     public let data: Data?
+
+    /// All the headers returned by the server.
     public let headers: [AnyHashable: Any]?
     
     /// Possible status codes in responses

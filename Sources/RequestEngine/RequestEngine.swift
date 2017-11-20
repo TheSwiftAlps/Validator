@@ -88,18 +88,27 @@ public final class RequestEngine {
         case html = "text/html; charset=utf-8"
     }
     
-    private let baseURL: String
+    /// The base URL of the server this component is connecting to.
+    private let baseURL: URL
+
+    /// A URLSession object used to channel all requests.
     private let session: URLSession
+    
+    /// The type of authentication for the next requests.
     public var auth = AuthenticationType.none
+    
+    /// The value of the "Content-Type" header to be sent with each request.
     public var contentType = MimeType.json
+
+    /// The value of the "Accept" header to be sent with each request.
     public var accept = MimeType.json
 
     /// Initializes a new instance.
     ///
     /// - Parameter baseURL: The base URL for this component, like `http://server.com`
     ///                      (without a trailing slash)
-    public init(_ baseURL: String, session: URLSession) {
-        self.baseURL = baseURL
+    public init(server: URL, session: URLSession) {
+        self.baseURL = server
         self.session = session
     }
 }
@@ -163,7 +172,7 @@ extension RequestEngine {
     /// - Throws: If the `baseURL` + `endpoint` cannot be converted to a URL.
     private func createRequest(_ method: RequestMethod, _ endpoint: String, _ data: [String:Any]? = nil) throws -> URLRequest {
 
-        guard let url = URL(string: baseURL + endpoint) else {
+        guard let url = URL(string: baseURL.absoluteString + endpoint) else {
             throw LocalError.cannotConvertStringToURL
         }
 

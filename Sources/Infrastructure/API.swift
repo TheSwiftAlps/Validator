@@ -4,6 +4,7 @@ import RequestEngine
 /// all the subclasses of the `APITest` class, to perform operations
 /// on the remote API endpoint.
 public struct API {
+    /// The synchronous request engine used by this object.
     let engine: RequestEngine
 
     /// Initializes a new instance.

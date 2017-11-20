@@ -17,8 +17,8 @@ let package = Package(
     ],
     targets: [
         .target(name: "RequestEngine", dependencies: []),
-        .target(name: "Infrastructure", dependencies: ["RequestEngine", "Rainbow", "LoremSwiftum"]),
+        .target(name: "Infrastructure", dependencies: ["RequestEngine", "LoremSwiftum"]),
         .target(name: "Scenarios", dependencies: ["Infrastructure"]),
-        .target(name: "Validator", dependencies: ["Scenarios"]),
+        .target(name: "Validator", dependencies: ["Scenarios", "Rainbow"]),
     ]
 )

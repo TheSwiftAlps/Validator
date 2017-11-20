@@ -1,6 +1,6 @@
 import Infrastructure
 
-public final class SearchTests: BaseScenario {
+public final class SearchScenario: BaseScenario {
 
     public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
         return [
@@ -30,4 +30,3 @@ public final class SearchTests: BaseScenario {
         }
     }
 }
-

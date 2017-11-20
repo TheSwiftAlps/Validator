@@ -1,12 +1,23 @@
 import Foundation
-import Rainbow
 import RequestEngine
 
+/// Holds and executes a set of scenarios.
 public struct ScenarioSuite {
+    /// Holds a collection of scenarios to be executed in sequence.
     let scenarios: [BaseScenario.Type]
-    let api: API
+    
+    /// Callback used by the "run()" method.
+    public typealias RunCallback = (ScenarioProgress) -> Void
 
-    public init(server: String, scenarios: [BaseScenario.Type]) {
+    /// The API object onto which the scenarios will be run.
+    let api: API
+    
+    /// Initializes a new scenario suite.
+    ///
+    /// - Parameters:
+    ///   - server: The URL to connect to.
+    ///   - scenarios: The scenarios to execute.
+    public init(server: URL, scenarios: [BaseScenario.Type]) {
 
         let configuration: URLSessionConfiguration
         configuration = URLSessionConfiguration.default
@@ -18,40 +29,51 @@ public struct ScenarioSuite {
                              delegate: nil,
                              delegateQueue: OperationQueue())
 
-        let engine = RequestEngine(server, session: session)
+        let engine = RequestEngine(server: server, session: session)
         self.api = API(engine)
         self.scenarios = scenarios
     }
 
-    public func run() {
+    public func run(callback: RunCallback) -> SuiteStats {
+        var scenariosCount = 0
+        var tests = 0
+        var passed = 0
+        var failed = 0
         for scenarioClass in scenarios {
             let scenarioCase = scenarioClass.init(api: self.api)
             if let scenario = scenarioCase.scenario(), scenario.count > 0 {
-                print("Processing scenario: \(type(of: scenarioCase))".yellow.bold)
+                scenariosCount += 1
+                callback(.info(message: "Processing scenario: \(type(of: scenarioCase))"))
                 for (testName, testMethod) in scenario {
+                    tests += 1
                     do {
                         try testMethod()
-                        print("\(testName) passed".green)
+                        callback(.success(message: "\(testName) passed"))
+                        passed += 1
                     }
                     catch BaseScenario.TestError<String>.failed(let message) {
-                        print("\(testName) failed: \(message)".red)
+                        callback(.error(message: "\(testName) failed: \(message)"))
                     }
                     catch BaseScenario.TestError<Int>.notEqual(let lhs, let rhs, let message) {
-                        print("\(testName) failed: expected \(lhs), got \(rhs) instead.".red)
-                        print("    Note: \(message)".red)
+                        callback(.error(message: "\(testName) failed: expected \(lhs), got \(rhs) instead."))
+                        callback(.error(message: "    Note: \(message)"))
                     }
                     catch BaseScenario.TestError<String>.notEqual(let lhs, let rhs, let message) {
-                        print("\(testName) failed: expected \(lhs), got \(rhs) instead.".red)
-                        print("    Note: \(message)".red)
+                        callback(.error(message: "\(testName) failed: expected \(lhs), got \(rhs) instead."))
+                        callback(.error(message: "    Note: \(message)"))
                     }
                     catch {
-                        print("\(testName) threw error: \(error)".red)
+                        callback(.error(message: "\(testName) threw error: \(error)"))
+                    }
+                    if passed == 0 {
+                        failed += 1
                     }
                 }
             }
             else {
-                print("No tests for this scenario! \(type(of: scenarioCase))".red.bold)
+                callback(.info(message: "No tests for this scenario: \(type(of: scenarioCase))"))
             }
         }
+        return SuiteStats(scenariosCount, tests, passed, failed)
     }
 }
