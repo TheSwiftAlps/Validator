@@ -123,6 +123,17 @@ public struct API {
         return try engine.post("/api/v1/notes", data: note)
     }
     
+    /// Performs a "PUT /api/v1/notes/UUID" request.
+    ///
+    /// - Parameters:
+    ///   - id: a UUID representing a single note.
+    ///   - note: A map of string keys and string values representing a note.
+    /// - Returns: the response of the call.
+    /// - Throws: anything that the RequestEngine throws.
+    public func edit(id: String, note: [String: String]) throws -> Response {
+        return try engine.put("/api/v1/notes/\(id)", data: note)
+    }
+    
     /// Performs a "DELETE /api/v1/notes/UUID" request.
     ///
     /// - Parameter id: a UUID representing a single note.

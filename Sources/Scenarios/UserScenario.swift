@@ -25,9 +25,14 @@ final public class UserScenario: BaseScenario {
     /// 3. Count the number of notes of the current user. It should be zero.
     /// 4. Create many notes.
     /// 5. Get one of those notes just created.
-    /// 6. Backup all notes; that should return a ZIP file, which will be saved in the Desktop folder.
-    /// 7. Count all the notes of the current user; the number should be equal to the number of notes created in step 4.
-    /// 8. Logout.
+    /// 6. Edit that note and verify it's saved correctly.
+    /// 7. Backup all notes; that should return a ZIP file, which will be saved in the Desktop folder.
+    /// 8. Count all the notes of the current user; the number should be equal to the number of notes created in step 4.
+    /// 9. Delete that note.
+    /// 10. Count again.
+    /// 11. Delete all the notes.
+    /// 12. Count again, and this time we should have zero notes.
+    /// 13. Log out.
     ///
     /// - Returns: A dictionary of string descriptions and test methods.
     public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
@@ -37,6 +42,7 @@ final public class UserScenario: BaseScenario {
             ("Count notes", countNotes),
             ("Create many notes", createManyNotes),
             ("Get note", getNote),
+            ("Edit note", editNote),
             ("Backup notes", backupNotes),
             ("Count notes", countNotes),
             ("Delete note", deleteNote),
@@ -98,6 +104,36 @@ final public class UserScenario: BaseScenario {
         }
         else {
             try fail("No JSON in response")
+        }
+    }
+    
+    /// Edits the contents of the current note.
+    ///
+    /// - Throws: whatever the underlying system throws.
+    func editNote() throws {
+        if let id = noteUUID {
+            let note = [
+                "title": "New Title",
+                "contents": "New Contents"
+            ]
+            let response = try api.edit(id: id, note: note)
+            try expectStatusCode(.ok, response)
+            try expectContentType(.json, response)
+            try expectSwiftAlpsVersionHeader(response)
+            if let json = response.json {
+                let data = json["data"] as! [String: Any]
+                let newUUID = data["id"] as! String
+                let newContents = data["contents"] as! String
+                let newTitle = data["title"] as! String
+                try expectStatusCode(.ok, response)
+                try expectContentType(.json, response)
+                try expectEquals(newUUID, id)
+                try expectEquals(newTitle, note["title"]!)
+                try expectEquals(newContents, note["contents"]!)
+            }
+        }
+        else {
+            try fail("No ID to retrieve note")
         }
     }
     
