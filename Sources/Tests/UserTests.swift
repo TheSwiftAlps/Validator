@@ -2,7 +2,11 @@ import Foundation
 
 final public class UserTests: APITest {
     var notesCount = 0
-    let LOCAL_PATH = "/Users/akosma/Desktop/archive.zip"
+    var desktopPath: String {
+        let search = NSSearchPathForDirectoriesInDomains(.desktopDirectory, .userDomainMask, true)
+        let desktop = search.first!
+        return "\(desktop)/archive.zip"
+    }
 
     override func scenario() -> [(String, APITest.TestMethod)]? {
         return [
@@ -39,7 +43,7 @@ final public class UserTests: APITest {
         let response = try api.backup()
         try expectStatusCode(.ok, response)
         try expectContentType(.zip, response)
-        let url = URL(fileURLWithPath: LOCAL_PATH)
+        let url = URL(fileURLWithPath: desktopPath)
         try response.save(at: url)
     }
 
