@@ -33,11 +33,14 @@ let argument = Argument<String>("server", description: "The server being tested.
 
 let main = command(argument, scenarioOption) { server, chosenScenario in
     if let url = URL(string: server) {
+        // Filter the list of scenarios
         let scenarios = filterScenarios(chosen: chosenScenario, list: scenarioList)
         if scenarios.count == 0 {
             print("Wrong scenario name: \(chosenScenario)".red)
             exit(1)
         }
+
+        // Create a suite and run it; publish the progress as it happens
         let suite = ScenarioSuite(server: url, scenarios: scenarios)
         let stats = suite.run { progress in
             switch progress {
@@ -49,6 +52,8 @@ let main = command(argument, scenarioOption) { server, chosenScenario in
                 print(text.red)
             }
         }
+
+        // Show stats at the end
         print("\n---")
         let message = "Executed \(stats.scenarios) scenarios with \(stats.tests) tests: \(stats.passed) passed, \(stats.failed) failed.\n"
         if stats.failed > 0 {
