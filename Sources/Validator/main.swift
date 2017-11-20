@@ -25,28 +25,18 @@ let scenarioList = [
     "search": SearchScenario.self
 ]
 
-let keys = scenarioList.map { key, value in key }.sorted().joined(separator: ", ")
-let scenarioOptionDescription = "Name of the scenario to execute (\(keys)), or 'all' to execute all scenarios."
+let keys = validKeys(list: scenarioList)
+let scenarioOptionDescription = "Name of the scenario to execute: all, \(keys)"
 let scenarioOption = Option("scenario", default: "all", description: scenarioOptionDescription)
 
 let argument = Argument<String>("server", description: "The server being tested.")
 
 let main = command(argument, scenarioOption) { server, chosenScenario in
     if let url = URL(string: server) {
-        var scenarios = [BaseScenario.Type]()
-        if chosenScenario == "all" {
-            for (_, value) in scenarioList {
-                scenarios.append(value)
-            }
-        }
-        else {
-            if let klass = scenarioList[chosenScenario] {
-                scenarios.append(klass)
-            }
-            else {
-                print("Wrong scenario name: \(chosenScenario)".red)
-                exit(1)
-            }
+        let scenarios = filterScenarios(chosen: chosenScenario, list: scenarioList)
+        if scenarios.count == 0 {
+            print("Wrong scenario name: \(chosenScenario)".red)
+            exit(1)
         }
         let suite = ScenarioSuite(server: url, scenarios: scenarios)
         let stats = suite.run { progress in
