@@ -11,7 +11,7 @@ final public class DefaultUserScenario: BaseScenario {
     public override func scenario() -> [(String, BaseScenario.TestMethod, Int)]? {
         return [
             ("Login default user", loginDefaultUser, 5),
-            ("Logout", logout, 0),
+            ("Logout", logout, 5),
         ]
     }
 }

@@ -88,7 +88,6 @@ Thursday, November 23rd, 2017
 - POST & PUT requests: 5 points
 - GET & DELETE requests: 3 points
 - "Ping": 2 points
-- Logout: 0 points (no interaction with API)
 
 ---
 

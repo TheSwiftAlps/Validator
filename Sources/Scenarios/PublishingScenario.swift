@@ -25,17 +25,17 @@ final public class PublishingScenario: BaseScenario {
     public override func scenario() -> [(String, BaseScenario.TestMethod, Int)]? {
         return [
             ("Create user", createUser, 5),
-            ("Login", login, 3),
+            ("Login", login, 5),
             ("Create note", createNote, 5),
             ("Check note is not published", checkNotPublished, 3),
             ("Publish note", publishNote, 5),
             ("Check published", checkPublished, 3),
-            ("Logout", logout, 0),
+            ("Logout", logout, 5),
             ("Check published", checkPublished, 3),
-            ("Login", login, 3),
+            ("Login", login, 5),
             ("Unpublish note", unpublishNote, 5),
             ("Check note is not published again", checkNotPublished, 3),
-            ("Logout", logout, 0),
+            ("Logout", logout, 5),
             ("Check note is not published one last time", checkNotPublished, 3),
         ]
     }

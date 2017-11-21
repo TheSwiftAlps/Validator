@@ -49,7 +49,7 @@ final public class UserScenario: BaseScenario {
             ("Count one note less", countNotes, 3),
             ("Delete all notes", deleteAllNotes, 3),
             ("Count zero notes", countNotes, 3),
-            ("Logout", logout, 0),
+            ("Logout", logout, 5),
         ]
     }
 
