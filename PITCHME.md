@@ -1,6 +1,8 @@
 # Vapor Workshop
 
-## The Swift Alps 2017 – Crans Montana – Switzerland
+## The Swift Alps
+## Crans Montana – Switzerland
+## Thursday, November 23rd, 2017
 
 ---
 
@@ -24,7 +26,7 @@
 
 ---
 
-## Specs 1/3
+## Specifications 1/3
 
 - The API receive a "ping"
 - Anyone can create a new user in the system
@@ -33,7 +35,7 @@
 
 ---
 
-## Specs 2/3
+## Specifications 2/3
 
 - Notes contain [Markdown](https://daringfireball.net/projects/markdown/) text
 - Users can get all of their notes
@@ -44,7 +46,7 @@
 
 ---
 
-## Specs 3/3
+## Specifications 3/3
 
 - …publish a note in HTML
 - …unpublish notes
@@ -116,6 +118,8 @@
 
 - Validator: <https://bitbucket.org/akosma/validator>
 - Vapor documentation: <https://docs.vapor.codes/2.0/>
+- Docker documentation: <https://docs.docker.com/>
+- ngrok documentation: <https://ngrok.com/docs>
 - ZIP Foundation: <https://github.com/weichsel/ZIPFoundation>
 
 ---
