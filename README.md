@@ -60,5 +60,5 @@ To generate the documentation of this project, you need the following things:
 
 Click on the link below to see a sample run of the validator on a working copy of the API:
 
-[![asciicast](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ.png)](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ)
+[![asciicast](https://asciinema.org/a/escJ0ywke0Ms1nCL2VGMIaekl.png)](https://asciinema.org/a/escJ0ywke0Ms1nCL2VGMIaekl)
 

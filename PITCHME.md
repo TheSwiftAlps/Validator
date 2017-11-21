@@ -93,7 +93,8 @@ Thursday, November 23rd, 2017
 ---
 
 ## @fa[street-view] Demo
-[![asciicast](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ.png)](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ)
+
+[![asciicast](https://asciinema.org/a/escJ0ywke0Ms1nCL2VGMIaekl.png)](https://asciinema.org/a/escJ0ywke0Ms1nCL2VGMIaekl)
 
 ---
 
