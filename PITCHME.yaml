@@ -3,8 +3,9 @@ footnote: "Copyright © 2017 AKOSMA Training – All Rights Reserved"
 theme: white # black, moon, night, beige, sky, and white
 highlight: xcode
 slide-number: false
-logo: assets/swiftalps.png
+logo: assets/images/swiftalps.png
 transition: none # convex, concave, default, fade, none, slide and zoom
 mousewheel: false
 remote-control: true
+theme-override : assets/css/swiftalps.css
 
