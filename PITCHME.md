@@ -87,9 +87,9 @@ Thursday, November 23rd, 2017
 
 ## @fa[sort-numeric-desc] Points
 
-- ZIP Backup: 10 points
-- POST & PUT requests: 5 points
 - GET & DELETE requests: 3 points
+- POST & PUT requests: 5 points
+- ZIP Backup: 10 points
 
 **Maximum Score: 152 Points**
 
