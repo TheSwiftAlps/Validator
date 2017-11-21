@@ -35,21 +35,21 @@ final public class UserScenario: BaseScenario {
     /// 13. Log out.
     ///
     /// - Returns: A dictionary of string descriptions and test methods.
-    public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
+    public override func scenario() -> [(String, BaseScenario.TestMethod, Int)]? {
         return [
-            ("Create user", createUser),
-            ("Login", login),
-            ("Count notes", countNotes),
-            ("Create many notes", createManyNotes),
-            ("Get note", getNote),
-            ("Edit note", editNote),
-            ("Backup notes", backupNotes),
-            ("Count notes", countNotes),
-            ("Delete note", deleteNote),
-            ("Count one note less", countNotes),
-            ("Delete all notes", deleteAllNotes),
-            ("Count zero notes", countNotes),
-            ("Logout", logout),
+            ("Create user", createUser, 5),
+            ("Login", login, 5),
+            ("Count notes", countNotes, 3),
+            ("Create many notes", createManyNotes, 5),
+            ("Get note", getNote, 3),
+            ("Edit note", editNote, 5),
+            ("Backup notes", backupNotes, 10),
+            ("Count notes", countNotes, 3),
+            ("Delete note", deleteNote, 3),
+            ("Count one note less", countNotes, 3),
+            ("Delete all notes", deleteAllNotes, 3),
+            ("Count zero notes", countNotes, 3),
+            ("Logout", logout, 0),
         ]
     }
 
@@ -106,7 +106,7 @@ final public class UserScenario: BaseScenario {
             try fail("No JSON in response")
         }
     }
-    
+
     /// Edits the contents of the current note.
     ///
     /// - Throws: whatever the underlying system throws.
@@ -136,7 +136,7 @@ final public class UserScenario: BaseScenario {
             try fail("No ID to retrieve note")
         }
     }
-    
+
     /// Deletes the note specified by its ID.
     ///
     /// - Throws: whatever the underlying system throws.
@@ -151,7 +151,7 @@ final public class UserScenario: BaseScenario {
             try fail("No ID to retrieve note")
         }
     }
-    
+
     /// Deletes all the notes of the current user.
     ///
     /// - Throws: whatever the underlying system throws.

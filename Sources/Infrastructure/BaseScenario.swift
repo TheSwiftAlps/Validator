@@ -55,8 +55,9 @@ open class BaseScenario {
     /// Subclasses are required to override this method, in order to provide the
     /// exact sequence of methods to be executed for a scenario.
     ///
-    /// - Returns: A dictionary of string descriptions and test methods.
-    open func scenario() -> [(String, TestMethod)]? {
+    /// - Returns: A dictionary of string descriptions and test methods,
+    ///            and some points to add if the test passes.
+    open func scenario() -> [(String, TestMethod, Int)]? {
         return nil
     }
 }

@@ -5,9 +5,9 @@ final public class PingScenario: BaseScenario {
     /// This scenario sends a GET "ping" request to the API.
     ///
     /// - Returns: A dictionary of string descriptions and test methods.
-    public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
+    public override func scenario() -> [(String, BaseScenario.TestMethod, Int)]? {
         return [
-            ("Ping", ping),
+            ("Ping", ping, 2),
         ]
     }
 

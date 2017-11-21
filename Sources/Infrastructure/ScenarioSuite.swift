@@ -43,17 +43,19 @@ public struct ScenarioSuite {
         var tests = 0
         var passed = 0
         var failed = 0
+        var points = 0
         for scenarioClass in scenarios {
             let scenarioObj = scenarioClass.init(api: self.api)
             if let scenarioTests = scenarioObj.scenario(), scenarioTests.count > 0 {
                 scenariosCount += 1
                 reporter.report(progress: .info(message: "Processing scenario: \(type(of: scenarioObj))"))
-                for (testName, testMethod) in scenarioTests {
+                for (testName, testMethod, testPoints) in scenarioTests {
                     tests += 1
                     do {
                         try testMethod()
                         reporter.report(progress: .success(message: "\(testName) passed"))
                         passed += 1
+                        points += testPoints
                     }
                     catch BaseScenario.TestError<String>.failed(let message) {
                         reporter.report(progress: .error(message: "\(testName) failed: \(message)"))
@@ -79,7 +81,7 @@ public struct ScenarioSuite {
                 reporter.report(progress: .info(message: "No tests for this scenario: \(type(of: scenarioObj))"))
             }
         }
-        let stats = SuiteStats(scenarios: scenariosCount, tests: tests, passed: passed, failed: failed)
+        let stats = SuiteStats(scenarios: scenariosCount, tests: tests, passed: passed, failed: failed, points: points)
         reporter.add(stats: stats)
     }
 }

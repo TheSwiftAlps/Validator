@@ -12,13 +12,13 @@ public final class SearchScenario: BaseScenario {
     /// 5. Searches notes by title, using a random word in one of the titles of the notes created previously.
     ///
     /// - Returns: A dictionary of string descriptions and test methods.
-    public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
+    public override func scenario() -> [(String, BaseScenario.TestMethod, Int)]? {
         return [
-            ("Create user", createUser),
-            ("Login", login),
-            ("Create many notes", createManyNotes),
-            ("Search by contents", searchByContents),
-            ("Search by title", searchByTitle),
+            ("Create user", createUser, 5),
+            ("Login", login, 3),
+            ("Create many notes", createManyNotes, 5),
+            ("Search by contents", searchByContents, 5),
+            ("Search by title", searchByTitle, 5),
         ]
     }
 
@@ -70,7 +70,7 @@ public final class SearchScenario: BaseScenario {
             try fail("No note contained the word \"\(randomWord)\" in the title")
         }
     }
-    
+
     /// Chooses a random word from an array of strings.
     ///
     /// - Parameter words: An array of strings to choose from.
@@ -78,7 +78,9 @@ public final class SearchScenario: BaseScenario {
     private func selectRandomWord(words: [String]) -> String {
         let count = words.count
         let randomIndex = count.randomFromZeroToMe()
-        let randomWord = words[randomIndex]
-        return randomWord
+        if words.count > 0 {
+            return words[randomIndex]
+        }
+        return ""
     }
 }

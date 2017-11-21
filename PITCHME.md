@@ -82,6 +82,16 @@ Thursday, November 23rd, 2017
 
 ---
 
+## @fa[sort-numeric-desc] Points
+
+- ZIP Backup: 10 points
+- POST & PUT requests: 5 points
+- GET & DELETE requests: 3 points
+- "Ping": 2 points
+- Logout: 0 points (no interaction with API)
+
+---
+
 ## @fa[street-view] Demo
 [![asciicast](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ.png)](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ)
 
@@ -89,14 +99,13 @@ Thursday, November 23rd, 2017
 
 ## @fa[briefcase] Working Tips
 
-- Study `Validator/Sources/Scenarios` carefully
-- Start with the easiest possible endpoint: "ping"
+- Study `Validator/Sources/Scenarios` & `Validator/Sources/Infrastructure/API.swift`
+- Start with the easiest possible endpoint: `ping`
 - Routes must match the specification exactly
 - Vapor provides almost everything off-the box
     - Use an in-memory SQLite database for storage
     - ZIP archive is the most difficult part
     - Think middleware!
-- I am here to help!
 
 ---
 

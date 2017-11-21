@@ -122,7 +122,7 @@ public struct API {
     public func create(note: [String: String]) throws -> Response {
         return try engine.post("/api/v1/notes", data: note)
     }
-    
+
     /// Performs a "PUT /api/v1/notes/UUID" request.
     ///
     /// - Parameters:
@@ -133,7 +133,7 @@ public struct API {
     public func edit(id: String, note: [String: String]) throws -> Response {
         return try engine.put("/api/v1/notes/\(id)", data: note)
     }
-    
+
     /// Performs a "DELETE /api/v1/notes/UUID" request.
     ///
     /// - Parameter id: a UUID representing a single note.
@@ -142,7 +142,7 @@ public struct API {
     public func delete(id: String) throws -> Response {
         return try engine.delete("/api/v1/notes/\(id)")
     }
-    
+
     /// Performs a "DELETE /api/v1/notes" request. This deletes ALL notes from the current user.
     ///
     /// - Returns: the response of the call.

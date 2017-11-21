@@ -22,21 +22,21 @@ final public class PublishingScenario: BaseScenario {
     /// 13. Check that the note is truly not published anymore.
     ///
     /// - Returns: A dictionary of string descriptions and test methods.
-    public override func scenario() -> [(String, BaseScenario.TestMethod)]? {
+    public override func scenario() -> [(String, BaseScenario.TestMethod, Int)]? {
         return [
-            ("Create user", createUser),
-            ("Login", login),
-            ("Create note", createNote),
-            ("Check note is not published", checkNotPublished),
-            ("Publish note", publishNote),
-            ("Check published", checkPublished),
-            ("Logout", logout),
-            ("Check published", checkPublished),
-            ("Login", login),
-            ("Unpublish note", unpublishNote),
-            ("Check note is not published again", checkNotPublished),
-            ("Logout", logout),
-            ("Check note is not published one last time", checkNotPublished),
+            ("Create user", createUser, 5),
+            ("Login", login, 3),
+            ("Create note", createNote, 5),
+            ("Check note is not published", checkNotPublished, 3),
+            ("Publish note", publishNote, 5),
+            ("Check published", checkPublished, 3),
+            ("Logout", logout, 0),
+            ("Check published", checkPublished, 3),
+            ("Login", login, 3),
+            ("Unpublish note", unpublishNote, 5),
+            ("Check note is not published again", checkNotPublished, 3),
+            ("Logout", logout, 0),
+            ("Check note is not published one last time", checkNotPublished, 3),
         ]
     }
 
