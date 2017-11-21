@@ -23,7 +23,7 @@ class StandardReporter: RunReporter {
             let message = """
             Executed \(stats.scenarios) scenarios with \(stats.tests) tests:
             \(stats.passed) passed, \(stats.failed) failed.
-            POINTS: \(stats.points)
+            SCORE: \(stats.points)
             """
             if stats.failed > 0 {
                 output += message.red
