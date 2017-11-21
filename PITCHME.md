@@ -9,6 +9,7 @@
 - Creation of a Notes API using Vapor 2.0
 - Specifications through an ad-hoc "Validator" project
 - Vapor ready to use in a Docker image
+- Team with highest number of green tests wins!
 
 ---
 
@@ -64,7 +65,6 @@
 - macOS & Linux
 - Makefile for common tasks
 - Dockerfiles available in `docker` project for reference
-- Download: <https://bitbucket.org/akosma/validator>
 
 ---?code=Sources/Infrastructure/BaseScenario.swift&title=Assertions&lang=swift
 @[188-192](Asserting for "Content-Type" headers)
@@ -91,6 +91,14 @@
 - Vapor provides almost everything off-the box
     - ZIP archive is the most difficult part
 - I am here to help!
+
+---
+
+# Links
+
+- Validator: <https://bitbucket.org/akosma/validator>
+- Vapor documentation: <https://docs.vapor.codes/2.0/>
+- ZIP Foundation: <https://github.com/weichsel/ZIPFoundation>
 
 ---
 
