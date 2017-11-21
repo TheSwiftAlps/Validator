@@ -88,7 +88,7 @@ Thursday, November 23rd, 2017
 - POST & PUT requests: 5 points
 - GET & DELETE requests: 3 points
 
-Maximum: **152 Points**
+**Maximum Score: 152 Points**
 
 ---
 
@@ -99,13 +99,12 @@ Maximum: **152 Points**
 
 ## @fa[briefcase] Working Tips
 
-- Study `Validator/Sources/Scenarios` & `Validator/Sources/Infrastructure/API.swift`
+- Study `Sources/Scenarios` & `Sources/Infrastructure/API.swift`
 - Start with the easiest possible endpoint: `ping`
-- Routes must match the specification exactly
-- Vapor provides almost everything off-the box
+- Vapor provides a lot!
     - Use an in-memory SQLite database for storage
     - ZIP archive is the most difficult part
-    - Think middleware!
+    - Middlewares!
 
 ---
 
