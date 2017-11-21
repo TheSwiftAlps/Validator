@@ -19,16 +19,24 @@ Thursday, November 23rd, 2017
 
 ## Docker
 
-- Ready-to-use Docker image contains Swift Vapor, tmux, zsh…
+- Ready-to-use Docker image contains Swift 4, Vapor 2, SQLite, tmux, zsh…
+    - Based on [Phusion Base Image](http://phusion.github.io/baseimage-docker/)
 - User `developer`, password `developer`
-- Can be used interactively
-- Exposes port 8080 (Vapor) to port 80 in local machine
+    - Can be used interactively
+- Maps port 8080 (Vapor) to port 80 in local machine
 - Local Desktop becomes image desktop
 - Dockerfiles available for reference
 
 ---
 
-## Specifications 1/3
+## ngrok
+
+- Simple reverse forwarding for your API
+- Provide me with the temporary URL for your API at the end of the exercise
+
+---
+
+## API Specifications 1/3
 
 - The API receive a "ping"
 - Anyone can create a new user in the system
@@ -37,7 +45,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Specifications 2/3
+## API Specifications 2/3
 
 - Notes contain [Markdown](https://daringfireball.net/projects/markdown/) text
 - Users can get all of their notes
@@ -48,7 +56,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Specifications 3/3
+## API Specifications 3/3
 
 - …publish a note in HTML
 - …unpublish notes
@@ -57,7 +65,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Validator Project
+## Validator
 
 - Swift package
 - macOS & Linux
@@ -75,7 +83,6 @@ Thursday, November 23rd, 2017
 ---
 
 ## Demo
-
 [![asciicast](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ.png)](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ)
 
 ---
@@ -97,13 +104,15 @@ Thursday, November 23rd, 2017
 - `vapor new Notes --template=api`
 - `vapor build`
 - `vapor run serve`
+- `vapor xcode`
+- `vapor clean`
 
 ---
 
 ## ngrok Cheatsheet
 
-- `ngrok http 80` (or 8080)
-- Web interface: <http://127.0.0.1:4040/>
+- `ngrok http 80`
+- Monitor interface: <http://127.0.0.1:4040/>
 - Forwarding: <http://xxxxxxxx.eu.ngrok.io/>
 
 ---
@@ -119,10 +128,11 @@ Thursday, November 23rd, 2017
 ## Links
 
 - Validator: <https://bitbucket.org/akosma/validator>
-- Vapor documentation: <https://docs.vapor.codes/2.0/>
-- Docker documentation: <https://docs.docker.com/>
-- ngrok documentation: <https://ngrok.com/docs>
+- Vapor docs: <https://docs.vapor.codes/2.0/>
+- Docker docs: <https://docs.docker.com/>
+- ngrok docs: <https://ngrok.com/docs>
 - ZIP Foundation: <https://github.com/weichsel/ZIPFoundation>
+- Docker base image: <http://phusion.github.io/baseimage-docker/>
 
 ---
 
