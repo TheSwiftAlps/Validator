@@ -4,7 +4,7 @@
 
 ---
 
-# Objective
+## Objective
 
 - Creation of a Notes API using Vapor 2.0
 - Specifications through an ad-hoc "Validator" project
@@ -13,13 +13,7 @@
 
 ---
 
-# Docker 1/2
-
-`sudo docker run --interactive --tty --privileged --publish 80:8080 --user=developer --volume ~/Desktop:/home/developer/Desktop akosma/vapor zsh`
-
----
-
-# Docker 2/2
+## Docker
 
 - Ready-to-use Docker image contains Swift Vapor, tmux, zsh…
 - User `developer`, password `developer`
@@ -30,7 +24,7 @@
 
 ---
 
-# Specifications 1/3
+## Specs 1/3
 
 - The API receive a "ping"
 - Anyone can create a new user in the system
@@ -39,7 +33,7 @@
 
 ---
 
-# Specifications 2/3
+## Specs 2/3
 
 - Notes contain [Markdown](https://daringfireball.net/projects/markdown/) text
 - Users can get all of their notes
@@ -50,7 +44,7 @@
 
 ---
 
-# Specifications 3/3
+## Specs 3/3
 
 - …publish a note in HTML
 - …unpublish notes
@@ -59,7 +53,7 @@
 
 ---
 
-# Validator Project
+## Validator Project
 
 - Swift package
 - macOS & Linux
@@ -76,13 +70,13 @@
 
 ---
 
-# Demo
+## Demo
 
 [![asciicast](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ.png)](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ)
 
 ---
 
-# Working Tips
+## Working Tips
 
 - Study `Validator/Sources/Scenarios` carefully
 - Start with the easiest possible endpoint: "ping"
@@ -94,7 +88,31 @@
 
 ---
 
-# Links
+## Vapor Cheatsheet
+
+- `vapor new Notes --template=api`
+- `vapor build`
+- `vapor run serve`
+
+---
+
+## ngrok Cheatsheet
+
+- `ngrok http 80` (or 8080)
+- Web interface: <http://127.0.0.1:4040/>
+- Forwarding: <http://xxxxxxxx.eu.ngrok.io/>
+
+---
+
+## Docker Cheatsheet
+
+- `sudo docker run --interactive --tty --privileged --publish 80:8080 --user=developer --volume ~/Desktop:/home/developer/Desktop akosma/vapor zsh`
+- `docker container list`
+- `docker images`
+
+---
+
+## Links
 
 - Validator: <https://bitbucket.org/akosma/validator>
 - Vapor documentation: <https://docs.vapor.codes/2.0/>
@@ -102,5 +120,5 @@
 
 ---
 
-# Good luck!
+## Good luck!
 
