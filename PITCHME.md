@@ -87,7 +87,8 @@ Thursday, November 23rd, 2017
 - ZIP Backup: 10 points
 - POST & PUT requests: 5 points
 - GET & DELETE requests: 3 points
-- "Ping": 2 points
+
+Maximum: **152 Points**
 
 ---
 

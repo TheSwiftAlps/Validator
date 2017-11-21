@@ -7,7 +7,7 @@ final public class PingScenario: BaseScenario {
     /// - Returns: A dictionary of string descriptions and test methods.
     public override func scenario() -> [(String, BaseScenario.TestMethod, Int)]? {
         return [
-            ("Ping", ping, 2),
+            ("Ping", ping, 3),
         ]
     }
 

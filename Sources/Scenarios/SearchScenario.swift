@@ -15,7 +15,7 @@ public final class SearchScenario: BaseScenario {
     public override func scenario() -> [(String, BaseScenario.TestMethod, Int)]? {
         return [
             ("Create user", createUser, 5),
-            ("Login", login, 3),
+            ("Login", login, 5),
             ("Create many notes", createManyNotes, 5),
             ("Search by contents", searchByContents, 5),
             ("Search by title", searchByTitle, 5),
