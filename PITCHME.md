@@ -92,9 +92,10 @@ Thursday, November 23rd, 2017
 - Study `Validator/Sources/Scenarios` carefully
 - Start with the easiest possible endpoint: "ping"
 - Routes must match the specification exactly
-- Use an in-memory SQLite database for storage
 - Vapor provides almost everything off-the box
+    - Use an in-memory SQLite database for storage
     - ZIP archive is the most difficult part
+    - Think middleware!
 - I am here to help!
 
 ---
