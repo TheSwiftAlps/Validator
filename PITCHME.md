@@ -1,24 +1,31 @@
-# Vapor Notes API
+# Vapor Workshop
+
+## The Swift Alps 2017 – Crans Montana – Switzerland
 
 ---
 
 # Objective
 
-- Creation of a Notes API using Vapor
+- Creation of a Notes API using Vapor 2.0
 - Specifications through an ad-hoc "Validator" project
 - Vapor ready to use in a Docker image
 
 ---
 
-# Docker
+# Docker 1/2
 
 `sudo docker run --interactive --tty --privileged --publish 80:8080 --user=developer --volume ~/Desktop:/home/developer/Desktop akosma/vapor zsh`
+
+---
+
+# Docker 2/2
 
 - Ready-to-use Docker image contains Swift Vapor, tmux, zsh…
 - User `developer`, password `developer`
 - Can be used interactively
 - Exposes port 8080 (Vapor) to port 80 in local machine
 - Local Desktop becomes image desktop
+- Dockerfiles available for reference
 
 ---
 
@@ -53,7 +60,10 @@
 
 # Validator Project
 
-- Specs: [Validator](https://bitbucket.org/akosma/validator) (Swift package)
+- Swift package
+- macOS & Linux
+- Makefile for common tasks
+- Dockerfiles available in `docker` project for reference
 - Download: <https://bitbucket.org/akosma/validator>
 
 ---?code=Sources/Infrastructure/BaseScenario.swift&title=Assertions&lang=swift
@@ -74,12 +84,13 @@
 
 # Working Tips
 
-- Routes must match the specification exactly
+- Study `Validator/Sources/Scenarios` carefully
 - Start with the easiest possible endpoint: "ping"
+- Routes must match the specification exactly
 - Use an in-memory SQLite database for storage
 - Vapor provides almost everything off-the box
-    - ZIP integration is the most difficult part of the exercise
-- Here to help!
+    - ZIP archive is the most difficult part
+- I am here to help!
 
 ---
 
