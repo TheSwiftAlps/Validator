@@ -36,7 +36,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## @fa[file-o] API Specifications 1/3
+## @fa[file-text] API Specifications 1/3
 
 - The API receive a "ping"
 - Anyone can create a new user in the system
@@ -45,7 +45,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## @fa[file-o] API Specifications 2/3
+## @fa[file-text] API Specifications 2/3
 
 - Notes contain [Markdown](https://daringfireball.net/projects/markdown/) text
 - Users can get all of their notes
@@ -56,7 +56,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## @fa[file-o] API Specifications 3/3
+## @fa[file-text] API Specifications 3/3
 
 - …publish a note in HTML
 - …unpublish notes

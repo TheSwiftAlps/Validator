@@ -8,4 +8,5 @@ transition: none # convex, concave, default, fade, none, slide and zoom
 mousewheel: false
 remote-control: true
 theme-override : assets/css/swiftalps.css
+vertical-center : false
 
