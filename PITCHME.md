@@ -41,23 +41,26 @@ Thursday, November 23rd, 2017
 - The API receive a "ping"
 - Anyone can create a new user in the system
 - Logged-in users can create notes
-- Notes are identified using UUIDs
+- Default user:
+    - username "vapor@theswiftalps.com"
+    - password "swiftalps"
 
 ---
 
 ## @fa[file-text] API Specifications 2/3
 
+- Notes are identified using UUIDs
 - Notes contain [Markdown](https://daringfireball.net/projects/markdown/) text
 - Users can get all of their notes
 - …get one single note
 - …edit a single note
 - …delete a single note
-- …delete all notes at once
 
 ---
 
 ## @fa[file-text] API Specifications 3/3
 
+- …delete all notes at once
 - …publish a note in HTML
 - …unpublish notes
 - …request a backup of their notes in ZIP format
