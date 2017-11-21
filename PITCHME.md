@@ -8,7 +8,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Objective
+## @fa[cloud] Vapor
 
 - Creation of a Notes API using Vapor 2.0
 - Specifications through an ad-hoc "Validator" project
@@ -17,26 +17,26 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Docker
+## @fa[picture-o] Docker
 
 - Ready-to-use Docker image contains Swift 4, Vapor 2, SQLite, tmux, zsh…
     - Based on [Phusion Base Image](http://phusion.github.io/baseimage-docker/)
+    - Dockerfiles available for reference
 - User `developer`, password `developer`
     - Can be used interactively
+    - Local Desktop becomes image desktop
 - Maps port 8080 (Vapor) to port 80 in local machine
-- Local Desktop becomes image desktop
-- Dockerfiles available for reference
 
 ---
 
-## ngrok
+## @fa[arrows-alt] ngrok
 
 - Simple reverse forwarding for your API
 - Provide me with the temporary URL for your API at the end of the exercise
 
 ---
 
-## API Specifications 1/3
+## @fa[file-o] API Specifications 1/3
 
 - The API receive a "ping"
 - Anyone can create a new user in the system
@@ -45,7 +45,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## API Specifications 2/3
+## @fa[file-o] API Specifications 2/3
 
 - Notes contain [Markdown](https://daringfireball.net/projects/markdown/) text
 - Users can get all of their notes
@@ -56,7 +56,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## API Specifications 3/3
+## @fa[file-o] API Specifications 3/3
 
 - …publish a note in HTML
 - …unpublish notes
@@ -65,7 +65,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Validator
+## @fa[check] Validator
 
 - Swift package
 - macOS & Linux
@@ -82,12 +82,12 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Demo
+## @fa[street-view] Demo
 [![asciicast](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ.png)](https://asciinema.org/a/LcGU1ps5JnzEYFXfSZC2YQSJQ)
 
 ---
 
-## Working Tips
+## @fa[briefcase] Working Tips
 
 - Study `Validator/Sources/Scenarios` carefully
 - Start with the easiest possible endpoint: "ping"
@@ -100,7 +100,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Vapor Cheatsheet
+## @fa[comments] Vapor Cheatsheet
 
 - `vapor new Notes --template=api`
 - `vapor build`
@@ -110,7 +110,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## ngrok Cheatsheet
+## @fa[comments] ngrok Cheatsheet
 
 - `ngrok http 80`
 - Monitor interface: <http://127.0.0.1:4040/>
@@ -118,7 +118,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Docker Cheatsheet
+## @fa[comments] Docker Cheatsheet
 
 - `sudo docker run --interactive --tty --privileged --publish 80:8080 --user=developer --volume ~/Desktop:/home/developer/Desktop akosma/vapor zsh`
 - `docker container list`
@@ -126,7 +126,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Links
+## @fa[comments] Links
 
 - Validator: <https://bitbucket.org/akosma/validator>
 - Vapor docs: <https://docs.vapor.codes/2.0/>
@@ -137,5 +137,5 @@ Thursday, November 23rd, 2017
 
 ---
 
-## Good luck!
+## @fa[graduation-cap] Good luck!
 
