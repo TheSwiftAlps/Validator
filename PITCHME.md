@@ -1,8 +1,10 @@
 # Vapor Workshop
 
 ## The Swift Alps
-## Crans Montana – Switzerland
-## Thursday, November 23rd, 2017
+
+### Crans Montana – Switzerland
+
+Thursday, November 23rd, 2017
 
 ---
 
