@@ -56,6 +56,31 @@ To generate the documentation of this project, you need the following things:
 - [Sourcekitten](https://github.com/jpsim/SourceKitten): `brew install sourcekitten`
 - [Jazzy](https://github.com/realm/jazzy): `gem install jazzy`
 
+## `curl` Requests
+
+Some sample `curl` requests to interact with the API, using `jq` to format the output nicely:
+
+Ping:
+
+`curl http://localhost/ping --request GET`
+
+Login and save authorization token in pasteboard, for future requests:
+
+`curl http://localhost/api/v1/login --silent --user "vapor@theswiftalps.com:swiftalps" --request POST | jq -r .token | pbcopy`
+
+Create note:
+
+`curl http://localhost/api/v1/notes --silent --request POST --header "Authorization: Bearer SNjmXWikniZZLaed8jDG5A==" --header "Content-Type:
+ application/json" --data @Fixtures/request_create_note.json | jq`
+
+List of notes:
+
+`curl http://localhost/api/v1/notes --silent --request GET --header "Authorization: Bearer SNjmXWikniZZLaed8jDG5A==" | jq`
+
+Search for notes:
+
+`curl http://localhost/api/v1/notes/search  --silent --request POST --header "Authorization: Bearer FPG1Llqfl5Ju200ZDPb/ig==" --data @Fixtures/request_search.json --header "Content-Type: application/json" | jq`
+
 ## Demo
 
 Click on the link below to see a sample run of the validator on a working copy of the API:
