@@ -35,7 +35,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## @fa[file-text] API Specifications 1/3
+## @fa[file-text] API Specs 1/3
 
 - The API responds to a "ping"
 - Anyone can create a new user in the system
@@ -46,7 +46,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## @fa[file-text] API Specifications 2/3
+## @fa[file-text] API Specs 2/3
 
 - Notes are identified using UUIDs
 - Notes contain [Markdown](https://daringfireball.net/projects/markdown/) text
@@ -57,7 +57,7 @@ Thursday, November 23rd, 2017
 
 ---
 
-## @fa[file-text] API Specifications 3/3
+## @fa[file-text] API Specs 3/3
 
 - …delete all notes at once
 - …publish a note in HTML
