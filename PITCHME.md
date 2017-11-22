@@ -22,10 +22,9 @@ Thursday, November 23rd, 2017
 - Ready-to-use Docker image contains Swift 4, Vapor 2, SQLite, tmux, zsh…
     - Based on [Phusion Base Image](http://phusion.github.io/baseimage-docker/)
     - Dockerfiles available for reference
-- User `developer`, password `developer`
+    - User `developer`, password `developer`
     - Can be used interactively
     - Local Desktop becomes image desktop
-- Maps port 8080 (Vapor) to port 80 in local machine
 
 ---
 
@@ -38,7 +37,7 @@ Thursday, November 23rd, 2017
 
 ## @fa[file-text] API Specifications 1/3
 
-- The API receive a "ping"
+- The API responds to a "ping"
 - Anyone can create a new user in the system
 - Logged-in users can create notes
 - Default user:
@@ -76,12 +75,17 @@ Thursday, November 23rd, 2017
 - Dockerfiles available in `docker` project for reference
 
 ---?code=Sources/Infrastructure/BaseScenario.swift&title=Assertions&lang=swift
-@[188-192](Asserting for "Content-Type" headers)
-@[201-205](Asserting for response status codes)
-@[228-230](Asserting for particular headers)
+@[189-193](Asserting for "Content-Type" headers)
+@[202-206](Asserting for response status codes)
+@[229-231](Asserting for particular headers)
 
 ---?code=Sources/Scenarios/PingScenario.swift&title=Ping Scenario&lang=swift
 @[18-29](Example scenario)
+
+---?code=Sources/Infrastructure/API.swift&title=API Wrapper&lang=swift
+@[37-48](Log in)
+@[29-31](Create user)
+@[159-161](Search)
 
 ---
 
