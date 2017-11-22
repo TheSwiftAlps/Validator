@@ -117,6 +117,7 @@ extension BaseScenario {
     /// - Throws: whatever the RequestEngine or the assertions throw.
     public func createNote() throws {
         let note = makeRandomNote()
+        let originalUUID = note["id"]
         let response = try api.create(note: note)
         if let json = response.json {
             let data = json["data"] as! [String: Any]
@@ -124,6 +125,7 @@ extension BaseScenario {
             noteSlug = data["slug"] as? String
             noteContents = data["contents"] as? String
             noteTitle = data["title"] as? String
+            try expectEquals(originalUUID!, noteUUID!)
             try expectStatusCode(.ok, response)
             try expectContentType(.json, response)
         }
