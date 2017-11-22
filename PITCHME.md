@@ -75,9 +75,9 @@ Thursday, November 23rd, 2017
 - Dockerfiles available in `docker` project for reference
 
 ---?code=Sources/Infrastructure/BaseScenario.swift&title=Assertions&lang=swift
-@[189-193](Asserting for "Content-Type" headers)
-@[202-206](Asserting for response status codes)
-@[229-231](Asserting for particular headers)
+@[191-195](Asserting for "Content-Type" headers)
+@[204-208](Asserting for response status codes)
+@[231-233](Asserting for particular headers)
 
 ---?code=Sources/Scenarios/PingScenario.swift&title=Ping Scenario&lang=swift
 @[18-29](Example scenario)
