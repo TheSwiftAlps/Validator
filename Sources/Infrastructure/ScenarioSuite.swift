@@ -53,7 +53,7 @@ public struct ScenarioSuite {
                     tests += 1
                     do {
                         try testMethod()
-                        reporter.report(progress: .success(message: "\(testName) passed"))
+                        reporter.report(progress: .success(message: "\(testName): passed"))
                         passed += 1
                         points += testPoints
                     }
