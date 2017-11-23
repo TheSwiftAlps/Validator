@@ -142,18 +142,22 @@ Thursday, November 23rd, 2017
 
 ---
 
-## @fa[keyboard-o] `curl` Cheatsheet 1/2
+## @fa[keyboard-o] `curl` Cheatsheet 1/3
 
-- `curl http://localhost/ping --request GET`
+- `curl http://localhost/ping`
 
 - `curl http://localhost/api/v1/login --silent --user "vapor@theswiftalps.com:swiftalps" --request POST | jq -r .token | pbcopy`
 
 ---
 
-## @fa[keyboard-o] `curl` Cheatsheet 2/2
+## @fa[keyboard-o] `curl` Cheatsheet 2/3
 
 - `curl http://localhost/api/v1/notes --request POST --header "Authorization: Bearer SNjmXWikniZZLaed8jDG5A==" --header "Content-Type:
  application/json" --data @Fixtures/request_create_note.json`
+
+---
+
+## @fa[keyboard-o] `curl` Cheatsheet 3/3
 
 - `curl http://localhost/api/v1/notes/search  --request POST --header "Authorization: Bearer FPG1Llqfl5Ju200ZDPb/ig==" --header "Content-Type: application/json" --data @Fixtures/request_search.json`
 
