@@ -9,4 +9,5 @@ mousewheel: false
 remote-control: true
 theme-override : assets/css/swiftalps.css
 vertical-center : false
+background : assets/vapor_background.jpg
 
