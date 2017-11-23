@@ -56,7 +56,7 @@ To generate the documentation of this project, you need the following things:
 - [Sourcekitten](https://github.com/jpsim/SourceKitten): `brew install sourcekitten`
 - [Jazzy](https://github.com/realm/jazzy): `gem install jazzy`
 
-## `curl` Requests
+## Sample `curl` Requests
 
 Some sample `curl` requests to interact with the API, using `jq` to format the output nicely:
 

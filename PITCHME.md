@@ -126,6 +126,14 @@ Thursday, November 23rd, 2017
 
 ---
 
+## @fa[comments] Docker Cheatsheet
+
+- `sudo docker run --interactive --tty --privileged --publish 80:8080 --user=developer --volume ~/Desktop:/home/developer/Desktop akosma/vapor zsh`
+- `docker container list`
+- `docker images`
+
+---
+
 ## @fa[comments] ngrok Cheatsheet
 
 - `ngrok http 80`
@@ -134,11 +142,16 @@ Thursday, November 23rd, 2017
 
 ---
 
-## @fa[comments] Docker Cheatsheet
+## @fa[keyboard-o] Sample `curl` Requests
 
-- `sudo docker run --interactive --tty --privileged --publish 80:8080 --user=developer --volume ~/Desktop:/home/developer/Desktop akosma/vapor zsh`
-- `docker container list`
-- `docker images`
+`curl http://localhost/ping --request GET`
+
+`curl http://localhost/api/v1/login --silent --user "vapor@theswiftalps.com:swiftalps" --request POST | jq -r .token | pbcopy`
+
+`curl http://localhost/api/v1/notes --silent --request POST --header "Authorization: Bearer SNjmXWikniZZLaed8jDG5A==" --header "Content-Type:
+ application/json" --data @Fixtures/request_create_note.json | jq`
+
+`curl http://localhost/api/v1/notes --silent --request GET --header "Authorization: Bearer SNjmXWikniZZLaed8jDG5A==" | jq`
 
 ---
 
