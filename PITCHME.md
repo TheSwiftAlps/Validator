@@ -165,6 +165,8 @@ Thursday, November 23rd, 2017
 
 ---?code=Fixtures/response_files.json&title=Typical JSON response&lang=json
 
+---
+
 ## @fa[comments] Links
 
 - Validator: <https://bitbucket.org/akosma/validator>
