@@ -161,7 +161,9 @@ Thursday, November 23rd, 2017
 
 - `curl http://localhost/api/v1/notes/search  --request POST --header "Authorization: Bearer FPG1Llqfl5Ju200ZDPb/ig==" --header "Content-Type: application/json" --data @Fixtures/request_search.json`
 
----
+---?code=Fixtures/request_create_note.json&title=JSON for creating notes&lang=json
+
+---?code=Fixtures/response_files.json&title=Typical JSON response&lang=json
 
 ## @fa[comments] Links
 
