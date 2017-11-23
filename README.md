@@ -4,6 +4,8 @@ This application is a suite of HTTP unit tests to validate the structure and beh
 
 It was created as part of the Vapor workshop in [Swift Alps 2017](https://theswiftalps.com/).
 
+A possible implementation of the API is available in the [VaporNotes](https://github.com/TheSwiftAlps/VaporNotes) project.
+
 ## Structure
 
 This project is a [standard Swift 4 package](https://swift.org/package-manager/). It has a `Makefile` to simplify some tasks:
