@@ -169,7 +169,7 @@ Thursday, November 23rd, 2017
 
 ## @fa[comments] Links
 
-- Validator: <https://bitbucket.org/akosma/validator>
+- Validator: <https://github.com/TheSwiftAlps/Validator>
 - Vapor docs: <https://docs.vapor.codes/2.0/>
 - Docker docs: <https://docs.docker.com/>
 - ngrok docs: <https://ngrok.com/docs>

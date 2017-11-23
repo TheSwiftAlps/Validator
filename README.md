@@ -46,7 +46,7 @@ This script depends on the following libraries:
 
 ## Slides
 
-The slides of the presentation of the project are in [Gitpitch](https://gitpitch.com/akosma/validator?grs=bitbucket).
+The slides of the presentation of the project are in [Gitpitch](https://gitpitch.com/TheSwiftAlps/Validator).
 
 ## Documentation
 
